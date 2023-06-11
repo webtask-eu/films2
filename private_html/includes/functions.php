@@ -6,10 +6,13 @@ function translate($text) {
 
     if (isset($translations[$language]) && isset($translations[$language][$text])) {
         return $translations[$language][$text];
+    } else {
+        echo "Translation not found for text: $text, language: $language";
     }
 
     return $text; // Возвращаем оригинальный текст, если перевод не найден
 }
+
 
 // Функция для обновления параметра в URL
 function update_query_param($param, $value) {
