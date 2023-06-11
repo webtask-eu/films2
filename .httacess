@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Перенаправление всех запросов на index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
+
+# Запрет доступа к папке private_html
+RedirectMatch 403 /private_html/.*
+
+# Запрет просмотра содержимого папок
+Options -Indexes
