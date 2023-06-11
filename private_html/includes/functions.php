@@ -15,21 +15,22 @@ function translate($text) {
 function update_query_param($param, $value) {
     $query = $_GET;
     $query[$param] = $value;
-    return $_SERVER['PHP_SELF'] . '?' . http_build_query($query);
+    return '?' . http_build_query($query);
 }
 
-// Функция для получения имени пользователя
-function get_user_name() {
-    // Здесь должна быть логика получения имени пользователя
-    // Замените этот код на вашу реализацию
-    return 'User';
+// Функция для получения текущего языка
+function get_language() {
+    if (isset($_SESSION['language'])) {
+        return $_SESSION['language'];
+    } else {
+        // Задайте здесь язык по умолчанию
+        return 'en';
+    }
 }
 
-// Функция для проверки авторизации пользователя
-function is_logged_in() {
-    // Здесь должна быть логика проверки авторизации пользователя
-    // Замените этот код на вашу реализацию
-    return false;
+// Функция для установки выбранного языка в сессии
+function set_language($language) {
+    $_SESSION['language'] = $language;
 }
 
 // Функция для перенаправления на другую страницу

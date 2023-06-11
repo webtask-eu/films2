@@ -1,10 +1,12 @@
 <?php
+// Английский язык
 $translations = array(
     'Welcome to My Film Collection!' => 'Welcome to My Film Collection!',
     'Create Collection' => 'Create Collection',
+    'Logout' => 'Logout',
     'Register' => 'Register',
     'Login' => 'Login',
-    'Logout' => 'Logout',
     'Latest Movies' => 'Latest Movies',
-    'Welcome, %s!' => 'Welcome, %s!', // %s will be replaced with the actual username
+    'Welcome, %s!' => 'Welcome, %s!',
 );
+?>

@@ -1,10 +1,12 @@
 <?php
+// Латышский язык
 $translations = array(
-    'Welcome to My Film Collection!' => 'Laipni lūdzam My Film Collection!',
+    'Welcome to My Film Collection!' => 'Laipni lūdzam Manā Filmas Kolekcijā!',
     'Create Collection' => 'Izveidot kolekciju',
-    'Register' => 'Reģistrēties',
-    'Login' => 'Pieteikties',
     'Logout' => 'Izrakstīties',
+    'Register' => 'Reģistrēties',
+    'Login' => 'Ieiet',
     'Latest Movies' => 'Jaunākās filmas',
-    'Welcome, %s!' => 'Laipni lūdzam, %s!', // %s will be replaced with the actual username
+    'Welcome, %s!' => 'Laipni lūdzam, %s!',
 );
+?>

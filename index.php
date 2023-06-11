@@ -3,18 +3,12 @@ require_once 'private_html/includes/session_start.php';
 require_once 'private_html/includes/db_connect.php';
 require_once 'private_html/includes/functions.php';
 
-// Получаем последние добавленные фильмы из базы данных
-$query = "SELECT * FROM movies ORDER BY id DESC LIMIT 10";
-$stmt = $db->query($query);
-$movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Проверка, если параметр языка передан в URL, устанавливаем его в сессии
+// Проверяем, если параметр языка передан в URL, устанавливаем его в сессии
 if (isset($_GET['lang'])) {
     $language = $_GET['lang'];
     set_language($language);
-    redirect($_SERVER['PHP_SELF']);
-} else {
-    $language = get_language();
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit();
 }
 
 ?>
@@ -37,9 +31,9 @@ if (isset($_GET['lang'])) {
                 <li><a href="public_html/login.php"><?php echo translate('Login'); ?></a></li>
             <?php endif; ?>
             <li>
-                <a href="<?php echo update_query_param('lang', 'en'); ?>" data-lang="en">English</a>
-                <a href="<?php echo update_query_param('lang', 'lv'); ?>" data-lang="lv">Latvian</a>
-                <a href="<?php echo update_query_param('lang', 'ru'); ?>" data-lang="ru">Russian</a>
+                <a href="?lang=en">English</a>
+                <a href="?lang=lv">Latvian</a>
+                <a href="?lang=ru">Russian</a>
             </li>
         </ul>
     </nav>
@@ -65,22 +59,5 @@ if (isset($_GET['lang'])) {
         <p><?php echo get_success_message(); ?></p>
     <?php endif; ?>
 
-    <script>
-    // JavaScript код для добавления языкового параметра к ссылкам
-    function addLanguageParam(url, lang) {
-        var separator = url.indexOf('?') !== -1 ? '&' : '?';
-        return url + separator + 'lang=' + lang;
-    }
-
-    // Получение текущего URL
-    var currentUrl = window.location.href;
-
-    // Обновление ссылок на язык при клике
-    document.querySelectorAll('nav a').forEach(function(link) {
-        var lang = link.getAttribute('data-lang');
-        var newUrl = addLanguageParam(currentUrl, lang);
-        link.href = newUrl;
-    });
-    </script>
 </body>
 </html>
