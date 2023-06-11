@@ -75,4 +75,24 @@ function get_success_message() {
     }
     return '';
 }
-?>
+
+// Загрузка файлов локализации
+function load_translations() {
+    $language = get_language();
+    $translations = [];
+
+    // Путь до файлов с локализацией
+    $localePath = __DIR__ . '/../private_html/locales/';
+
+    // Загрузка файлов локализации
+    $translationFiles = glob($localePath . '*.php');
+    foreach ($translationFiles as $file) {
+        $langCode = basename($file, '.php');
+        $translations[$langCode] = include $file;
+    }
+
+    return $translations;
+}
+
+// Загрузка переводов
+$translations = load_translations();
