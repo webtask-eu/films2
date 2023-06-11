@@ -1,8 +1,10 @@
 <?php
 return [
-    'Film Collection' => 'Коллекция Фильмов',
     'Home' => 'Главная',
-    'Create Collection' => 'Создать Коллекцию',
-    'Latest Movies' => 'Последние Фильмы',
+    'Create Collection' => 'Создать коллекцию',
+    'Logout' => 'Выйти',
+    'Register' => 'Регистрация',
+    'Login' => 'Войти',
+    'Latest Movies' => 'Последние фильмы',
     'No movies found.' => 'Фильмы не найдены.',
 ];
