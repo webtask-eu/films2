@@ -23,3 +23,8 @@ function redirect($url) {
     header("Location: $url");
     exit();
 }
+
+// Функция для проверки авторизации пользователя
+function is_logged_in() {
+    return isset($_SESSION['user_id']);
+}
