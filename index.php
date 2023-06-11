@@ -1,7 +1,7 @@
 <?php
-require_once '../private_html/includes/session_start.php';
-require_once '../private_html/includes/db_connect.php';
-require_once '../private_html/includes/functions.php';
+require_once 'private_html/includes/session_start.php';
+require_once 'private_html/includes/db_connect.php';
+require_once 'private_html/includes/functions.php';
 
 // Получаем последние добавленные фильмы из базы данных
 $query = "SELECT * FROM movies ORDER BY id DESC LIMIT 10";
