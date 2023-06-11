@@ -13,7 +13,6 @@ function translate($text) {
     return $text; // Возвращаем оригинальный текст, если перевод не найден
 }
 
-
 // Функция для обновления параметра в URL
 function update_query_param($param, $value) {
     $query = $_GET;
@@ -99,7 +98,7 @@ function load_translations() {
     }
 
     // Отладочная информация
-    echo  $localePath;
+    echo $localePath . "<br>";
     echo "<pre>";
     echo "Debug Info:\n";
     echo "Translations:\n";

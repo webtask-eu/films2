@@ -1,10 +1,8 @@
 <?php
-// Латышский перевод
-
-$translations = [
-    'Welcome' => 'Laipni lūdzam',
-    'Home' => 'Mājas',
-    'Latest Movies' => 'Jaunākie filmas',
-    // и так далее...
+return [
+    'Film Collection' => 'Filmu Kolekcija',
+    'Home' => 'Sākums',
+    'Create Collection' => 'Izveidot Kolekciju',
+    'Latest Movies' => 'Jaunākās Filmas',
+    'No movies found.' => 'Nav atrasta neviena filma.',
 ];
-?>
