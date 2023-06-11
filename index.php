@@ -1,23 +1,26 @@
 <?php
-require_once 'includes/session_start.php';
-require_once 'includes/functions.php';
-
-// Проверка авторизации пользователя
-if (!is_logged_in()) {
-    redirect('/login.php');
-}
+require_once __DIR__ . '/private_html/includes/session_start.php';
+require_once __DIR__ . '/private_html/includes/functions.php';
 
 // Загрузка переводов
 $translations = load_translations();
 
+// Получение языка из параметра GET
+if (isset($_GET['lang'])) {
+    $lang = $_GET['lang'];
+
+    // Установка языка
+    set_language($lang);
+
+    // Перенаправление на главную страницу
+    redirect('/index.php');
+}
+
 // Получение текущего языка
 $currentLanguage = get_language();
 
-// Обработка формы создания коллекции
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Обработка данных формы и создание коллекции
-    // ...
-}
+// Получение последних фильмов
+$latestMovies = get_latest_movies();
 
 // Получение сообщения об ошибке
 $error_message = get_error_message();
@@ -30,16 +33,20 @@ $success_message = get_success_message();
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><?php echo translate('Create Collection'); ?></title>
-    <link rel="stylesheet" href="css/style.css">
+    <title><?php echo translate('Film Collection'); ?></title>
+    <link rel="stylesheet" href="public_html/css/style.css">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="index.php"><?php echo translate('Home'); ?></a></li>
-                <li><a href="collection_create.php"><?php echo translate('Create Collection'); ?></a></li>
-                <li><a href="logout.php"><?php echo translate('Logout'); ?></a></li>
+                <li><a href="/index.php"><?php echo translate('Home'); ?></a></li>
+                <?php if (is_logged_in()) { ?>
+                    <li><a href="/private_html/collection_create.php"><?php echo translate('Create Collection'); ?></a></li>
+                <?php } else { ?>
+                    <li><a href="/public_html/register.php"><?php echo translate('Register'); ?></a></li>
+                    <li><a href="/public_html/login.php"><?php echo translate('Login'); ?></a></li>
+                <?php } ?>
                 <li><a href="<?php echo update_query_param('lang', 'en'); ?>">EN</a></li>
                 <li><a href="<?php echo update_query_param('lang', 'lv'); ?>">LV</a></li>
                 <li><a href="<?php echo update_query_param('lang', 'ru'); ?>">RU</a></li>
@@ -47,18 +54,22 @@ $success_message = get_success_message();
         </nav>
     </header>
     <main>
-        <h1><?php echo translate('Create Collection'); ?></h1>
+        <h1><?php echo translate('Latest Movies'); ?></h1>
         <?php if ($error_message) { ?>
             <p class="error"><?php echo $error_message; ?></p>
         <?php } ?>
         <?php if ($success_message) { ?>
             <p class="success"><?php echo $success_message; ?></p>
         <?php } ?>
-        <form method="post">
-            <!-- Форма для создания коллекции -->
-            <!-- ... -->
-            <button type="submit"><?php echo translate('Create'); ?></button>
-        </form>
+        <?php if (!empty($latestMovies)) { ?>
+            <ul>
+                <?php foreach ($latestMovies as $movie) { ?>
+                    <li><?php echo $movie; ?></li>
+                <?php } ?>
+            </ul>
+        <?php } else { ?>
+            <p><?php echo translate('No movies found.'); ?></p>
+        <?php } ?>
     </main>
 </body>
 </html>
