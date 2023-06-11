@@ -8,6 +8,13 @@ $query = "SELECT * FROM movies ORDER BY id DESC LIMIT 10";
 $stmt = $db->query($query);
 $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Проверка, если параметр языка передан в URL, устанавливаем его в сессии
+if (isset($_GET['lang'])) {
+    $language = $_GET['lang'];
+    set_language($language);
+    redirect($_SERVER['PHP_SELF']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -28,10 +35,9 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <li><a href="public_html/login.php"><?php echo translate('Login'); ?></a></li>
             <?php endif; ?>
             <li>
-            <a href="<?php echo update_query_param('lang', 'en'); ?>">English</a>
-            <a href="<?php echo update_query_param('lang', 'lv'); ?>">Latvian</a>
-            <a href="<?php echo update_query_param('lang', 'ru'); ?>">Russian</a>
-
+                <a href="<?php echo update_query_param('lang', 'en'); ?>">English</a>
+                <a href="<?php echo update_query_param('lang', 'lv'); ?>">Latvian</a>
+                <a href="<?php echo update_query_param('lang', 'ru'); ?>">Russian</a>
             </li>
         </ul>
     </nav>

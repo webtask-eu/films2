@@ -11,10 +11,11 @@ function translate($text) {
     return $text; // Возвращаем оригинальный текст, если перевод не найден
 }
 
-// Функция для добавления параметра к URL
-function add_query_param($url, $param, $value) {
-    $separator = (parse_url($url, PHP_URL_QUERY) == NULL) ? '?' : '&';
-    return $url . $separator . urlencode($param) . '=' . urlencode($value);
+// Функция для обновления параметра в URL
+function update_query_param($param, $value) {
+    $query = $_GET;
+    $query[$param] = $value;
+    return $_SERVER['PHP_SELF'] . '?' . http_build_query($query);
 }
 
 // Функция для получения имени пользователя
@@ -29,11 +30,4 @@ function is_logged_in() {
     // Здесь должна быть логика проверки авторизации пользователя
     // Замените этот код на вашу реализацию
     return false;
-}
-
-// Функция для обновления параметра в URL
-function update_query_param($param, $value) {
-    $query = $_GET;
-    $query[$param] = $value;
-    return $_SERVER['PHP_SELF'] . '?' . http_build_query($query);
 }
