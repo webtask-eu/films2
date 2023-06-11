@@ -18,16 +18,6 @@ function update_query_param($param, $value) {
     return '?' . http_build_query($query);
 }
 
-// Функция для получения текущего языка
-function get_language() {
-    if (isset($_SESSION['language'])) {
-        return $_SESSION['language'];
-    } else {
-        // Задайте здесь язык по умолчанию
-        return 'en';
-    }
-}
-
 // Функция для установки выбранного языка в сессии
 function set_language($language) {
     $_SESSION['language'] = $language;
