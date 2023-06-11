@@ -34,7 +34,7 @@ $success_message = get_success_message();
 <head>
     <meta charset="UTF-8">
     <title><?php echo translate('Film Collection'); ?></title>
-    <link rel="stylesheet" href="public_html/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <header>
@@ -42,10 +42,10 @@ $success_message = get_success_message();
             <ul>
                 <li><a href="/index.php"><?php echo translate('Home'); ?></a></li>
                 <?php if (is_logged_in()) { ?>
-                    <li><a href="/private_html/collection_create.php"><?php echo translate('Create Collection'); ?></a></li>
+                    <li><a href="/collection_create.php"><?php echo translate('Create Collection'); ?></a></li>
                 <?php } else { ?>
-                    <li><a href="/public_html/register.php"><?php echo translate('Register'); ?></a></li>
-                    <li><a href="/public_html/login.php"><?php echo translate('Login'); ?></a></li>
+                    <li><a href="/register.php"><?php echo translate('Register'); ?></a></li>
+                    <li><a href="/login.php"><?php echo translate('Login'); ?></a></li>
                 <?php } ?>
                 <li><a href="<?php echo update_query_param('lang', 'en'); ?>">EN</a></li>
                 <li><a href="<?php echo update_query_param('lang', 'lv'); ?>">LV</a></li>
