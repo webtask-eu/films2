@@ -1,14 +1,29 @@
 <?php
+require_once 'db_connect.php';
+
+// Начинаем сессию
 session_start();
 
 // Функция для установки языка
 function set_language($language) {
-    $_SESSION['language'] = $language;
+    if (in_array($language, ['en', 'lv', 'ru'])) {
+        $_SESSION['language'] = $language;
+    }
 }
 
-// Функция для получения текущего языка
+// Функция для получения языка
 function get_language() {
-    return isset($_SESSION['language']) ? $_SESSION['language'] : 'en'; // Здесь 'en' - язык по умолчанию
+    return $_SESSION['language'] ?? 'en';
+}
+
+// Функция для получения сообщения об успехе
+function get_success_message() {
+    return $_SESSION['success_message'] ?? '';
+}
+
+// Очищаем сообщение об успехе
+function clear_success_message() {
+    unset($_SESSION['success_message']);
 }
 
 // Функция для установки сообщения об ошибке
@@ -18,32 +33,10 @@ function set_error_message($message) {
 
 // Функция для получения сообщения об ошибке
 function get_error_message() {
-    $message = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : '';
-    unset($_SESSION['error_message']); // Удаляем сообщение после чтения, чтобы оно не отображалось повторно
-    return $message;
+    return $_SESSION['error_message'] ?? '';
 }
 
-// Функция для установки сообщения об успехе
-function set_success_message($message) {
-    $_SESSION['success_message'] = $message;
-}
-
-// Функция для получения сообщения об успехе
-function get_success_message() {
-    $message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : '';
-    unset($_SESSION['success_message']); // Удаляем сообщение после чтения, чтобы оно не отображалось повторно
-    return $message;
-}
-
-// Проверка, если параметр языка передан в URL, устанавливаем его в сессии
-if (isset($_GET['lang'])) {
-    $language = $_GET['lang'];
-    set_language($language);
-}
-
-// Загрузка языкового файла на основе текущего языка
-$language = get_language();
-$language_file = "private_html/locales/{$language}.php";
-if (file_exists($language_file)) {
-    require_once $language_file;
+// Очищаем сообщение об ошибке
+function clear_error_message() {
+    unset($_SESSION['error_message']);
 }
