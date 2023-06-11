@@ -30,3 +30,10 @@ function is_logged_in() {
     // Замените этот код на вашу реализацию
     return false;
 }
+
+// Функция для обновления параметра в URL
+function update_query_param($param, $value) {
+    $query = $_GET;
+    $query[$param] = $value;
+    return $_SERVER['PHP_SELF'] . '?' . http_build_query($query);
+}

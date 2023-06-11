@@ -28,9 +28,9 @@ $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <li><a href="public_html/login.php"><?php echo translate('Login'); ?></a></li>
             <?php endif; ?>
             <li>
-                <a href="<?php echo $_SERVER['PHP_SELF'] . '?' . http_build_query(array_merge($_GET, array('lang' => 'en'))); ?>">English</a>
-                <a href="<?php echo $_SERVER['PHP_SELF'] . '?' . http_build_query(array_merge($_GET, array('lang' => 'lv'))); ?>">Latvian</a>
-                <a href="<?php echo $_SERVER['PHP_SELF'] . '?' . http_build_query(array_merge($_GET, array('lang' => 'ru'))); ?>">Russian</a>
+            <a href="<?php echo update_query_param('lang', 'en'); ?>">English</a>
+            <a href="<?php echo update_query_param('lang', 'lv'); ?>">Latvian</a>
+            <a href="<?php echo update_query_param('lang', 'ru'); ?>">Russian</a>
 
             </li>
         </ul>
