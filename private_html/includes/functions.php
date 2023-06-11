@@ -41,8 +41,23 @@ function get_user_name() {
     // Возвращайте имя пользователя в нужном формате
 }
 
+// Функция для получения сообщения об ошибке
+function get_error_message() {
+    if (isset($_SESSION['error_message'])) {
+        $message = $_SESSION['error_message'];
+        unset($_SESSION['error_message']);
+        return $message;
+    }
+    return '';
+}
+
 // Функция для получения сообщения об успехе
 function get_success_message() {
-    // Здесь вам нужно добавить код для получения сообщения об успехе из сессии или другого источника
-    // Возвращайте сообщение об успехе в нужном формате
+    if (isset($_SESSION['success_message'])) {
+        $message = $_SESSION['success_message'];
+        unset($_SESSION['success_message']);
+        return $message;
+    }
+    return '';
 }
+?>
