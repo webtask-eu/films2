@@ -31,3 +31,9 @@ function is_logged_in() {
     // Замените этот код на вашу реализацию
     return false;
 }
+
+// Функция для перенаправления на другую страницу
+function redirect($url) {
+    header("Location: $url");
+    exit();
+}
