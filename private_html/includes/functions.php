@@ -82,7 +82,7 @@ function load_translations() {
     $translations = [];
 
     // Путь до файлов с локализацией
-    $localePath = __DIR__ . 'private_html/locales/';
+    $localePath = __DIR__ . '/locales/';
 
     // Загрузка файлов локализации
     $translationFiles = glob($localePath . '*.php');
