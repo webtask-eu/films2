@@ -3,7 +3,11 @@ session_start();
 
 // Функция для установки языка
 function set_language($language) {
-    $_SESSION['language'] = $language;
+    if (isset($_GET['lang'])) {
+        $language = $_GET['lang'];
+        set_language($language);
+        redirect($_SERVER['PHP_SELF']);
+    }
 }
 
 // Функция для получения текущего языка
