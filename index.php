@@ -63,5 +63,22 @@ if (isset($_GET['lang'])) {
         <p><?php echo get_success_message(); ?></p>
     <?php endif; ?>
 
+    <script>
+    // JavaScript код для добавления языкового параметра к ссылкам
+    function addLanguageParam(url, lang) {
+        var separator = url.indexOf('?') !== -1 ? '&' : '?';
+        return url + separator + 'lang=' + lang;
+    }
+
+    // Получение текущего URL
+    var currentUrl = window.location.href;
+
+    // Обновление ссылок на язык при клике
+    document.querySelectorAll('nav a').forEach(function(link) {
+        var lang = link.getAttribute('data-lang');
+        var newUrl = addLanguageParam(currentUrl, lang);
+        link.href = newUrl;
+    });
+    </script>
 </body>
 </html>
