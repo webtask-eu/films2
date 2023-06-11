@@ -1,8 +1,10 @@
 <?php
-$translations = [
+$translations = array(
+    'Welcome to My Film Collection!' => 'Добро пожаловать в My Film Collection!',
     'Create Collection' => 'Создать коллекцию',
     'Register' => 'Регистрация',
     'Login' => 'Вход',
     'Logout' => 'Выход',
-    // Другие переводы...
-];
+    'Latest Movies' => 'Последние фильмы',
+    'Welcome, %s!' => 'Добро пожаловать, %s!', // %s will be replaced with the actual username
+);
