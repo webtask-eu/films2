@@ -24,6 +24,21 @@ function redirect($url) {
     exit();
 }
 
+// Функция для установки языка
+function set_language($language) {
+    $_SESSION['language'] = $language;
+}
+
+// Функция для получения текущего языка
+function get_language() {
+    if (isset($_SESSION['language'])) {
+        return $_SESSION['language'];
+    } else {
+        // Здесь вы можете установить язык по умолчанию
+        return 'en';
+    }
+}
+
 // Функция для проверки авторизации пользователя
 function is_logged_in() {
     return isset($_SESSION['user_id']);
