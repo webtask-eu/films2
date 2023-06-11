@@ -43,7 +43,7 @@ if (isset($_GET['lang'])) {
 
 // Загрузка языкового файла на основе текущего языка
 $language = get_language();
-$language_file = "locales/{$language}.php";
+$language_file = "private_html/locales/{$language}.php";
 if (file_exists($language_file)) {
     require_once $language_file;
 }
