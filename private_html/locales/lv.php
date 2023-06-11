@@ -1,10 +1,10 @@
 <?php
 return [
+    'Film Collection' => 'Filmu kolekcija',
     'Home' => 'Sākums',
     'Create Collection' => 'Izveidot kolekciju',
-    'Logout' => 'Izrakstīties',
     'Register' => 'Reģistrēties',
-    'Login' => 'Pieslēgties',
-    'Latest Movies' => 'Jaunākie filmas',
-    'No movies found.' => 'Nav atrastas filmas.',
+    'Login' => 'Ielogoties',
+    'Latest Movies' => 'Jaunākās filmas',
+    'No movies found.' => 'Nav atrasta neviena filma.',
 ];
