@@ -96,6 +96,7 @@ function load_translations() {
     }
 
     // Отладочная информация
+    echo  $localePath;
     echo "<pre>";
     echo "Debug Info:\n";
     echo "Translations:\n";
