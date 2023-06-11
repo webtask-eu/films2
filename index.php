@@ -7,8 +7,7 @@ require_once 'private_html/includes/functions.php';
 if (isset($_GET['lang'])) {
     $language = $_GET['lang'];
     set_language($language);
-    header('Location: ' . $_SERVER['PHP_SELF']);
-    exit();
+    redirect($_SERVER['PHP_SELF']);
 }
 
 ?>
@@ -18,17 +17,17 @@ if (isset($_GET['lang'])) {
 <head>
     <meta charset="UTF-8">
     <title>My Film Collection</title>
-    <link rel="stylesheet" href="public_html/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="public_html/collection_create.php"><?php echo translate('Create Collection'); ?></a></li>
+            <li><a href="collection_create.php"><?php echo translate('Create Collection'); ?></a></li>
             <?php if (is_logged_in()): ?>
-                <li><a href="public_html/logout.php"><?php echo translate('Logout'); ?></a></li>
+                <li><a href="logout.php"><?php echo translate('Logout'); ?></a></li>
             <?php else: ?>
-                <li><a href="public_html/register.php"><?php echo translate('Register'); ?></a></li>
-                <li><a href="public_html/login.php"><?php echo translate('Login'); ?></a></li>
+                <li><a href="register.php"><?php echo translate('Register'); ?></a></li>
+                <li><a href="login.php"><?php echo translate('Login'); ?></a></li>
             <?php endif; ?>
             <li>
                 <a href="?lang=en">English</a>
