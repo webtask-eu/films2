@@ -88,8 +88,21 @@ function load_translations() {
     $translationFiles = glob($localePath . '*.php');
     foreach ($translationFiles as $file) {
         $langCode = basename($file, '.php');
-        $translations[$langCode] = include $file;
+        if (file_exists($file)) {
+            $translations[$langCode] = include $file;
+        } else {
+            echo "Localization file not found: $file";
+        }
     }
+
+    // Отладочная информация
+    echo "<pre>";
+    echo "Debug Info:\n";
+    echo "Translations:\n";
+    print_r($translations);
+    echo "Translation Files:\n";
+    print_r($translationFiles);
+    echo "</pre>";
 
     return $translations;
 }
