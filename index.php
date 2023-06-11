@@ -13,6 +13,8 @@ if (isset($_GET['lang'])) {
     $language = $_GET['lang'];
     set_language($language);
     redirect($_SERVER['PHP_SELF']);
+} else {
+    $language = get_language();
 }
 
 ?>
@@ -35,9 +37,9 @@ if (isset($_GET['lang'])) {
                 <li><a href="public_html/login.php"><?php echo translate('Login'); ?></a></li>
             <?php endif; ?>
             <li>
-                <a href="<?php echo update_query_param('lang', 'en'); ?>">English</a>
-                <a href="<?php echo update_query_param('lang', 'lv'); ?>">Latvian</a>
-                <a href="<?php echo update_query_param('lang', 'ru'); ?>">Russian</a>
+                <a href="<?php echo update_query_param('lang', 'en'); ?>" data-lang="en">English</a>
+                <a href="<?php echo update_query_param('lang', 'lv'); ?>" data-lang="lv">Latvian</a>
+                <a href="<?php echo update_query_param('lang', 'ru'); ?>" data-lang="ru">Russian</a>
             </li>
         </ul>
     </nav>
