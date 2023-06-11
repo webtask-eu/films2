@@ -3,13 +3,21 @@ require_once 'private_html/includes/session_start.php';
 require_once 'private_html/includes/db_connect.php';
 require_once 'private_html/includes/functions.php';
 
-// Проверяем, если параметр языка передан в URL, устанавливаем его в сессии
-if (isset($_GET['lang'])) {
-    $language = $_GET['lang'];
-    set_language($language);
-    redirect($_SERVER['PHP_SELF']);
-}
+try {
+    // Проверяем, если параметр языка передан в URL, устанавливаем его в сессии
+    if (isset($_GET['lang'])) {
+        $language = $_GET['lang'];
+        set_language($language);
+        redirect($_SERVER['PHP_SELF']);
+    }
 
+    // Получаем список последних фильмов
+    $movies = get_latest_movies();
+
+} catch (Exception $e) {
+    echo 'Error: ' . $e->getMessage();
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +65,12 @@ if (isset($_GET['lang'])) {
     <?php if (get_success_message()): ?>
         <p><?php echo get_success_message(); ?></p>
     <?php endif; ?>
+
+    <h3>Debug Info:</h3>
+    <pre>
+        <?php var_dump($_SESSION); ?>
+        <?php var_dump($_GET); ?>
+    </pre>
 
 </body>
 </html>
