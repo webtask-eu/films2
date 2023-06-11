@@ -3,11 +3,7 @@ session_start();
 
 // Функция для установки языка
 function set_language($language) {
-    if (isset($_GET['lang'])) {
-        $language = $_GET['lang'];
-        set_language($language);
-        redirect($_SERVER['PHP_SELF']);
-    }
+    $_SESSION['language'] = $language;
 }
 
 // Функция для получения текущего языка
@@ -37,4 +33,17 @@ function get_success_message() {
     $message = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : '';
     unset($_SESSION['success_message']); // Удаляем сообщение после чтения, чтобы оно не отображалось повторно
     return $message;
+}
+
+// Проверка, если параметр языка передан в URL, устанавливаем его в сессии
+if (isset($_GET['lang'])) {
+    $language = $_GET['lang'];
+    set_language($language);
+}
+
+// Загрузка языкового файла на основе текущего языка
+$language = get_language();
+$language_file = "locales/{$language}.php";
+if (file_exists($language_file)) {
+    require_once $language_file;
 }
