@@ -18,11 +18,6 @@ function update_query_param($param, $value) {
     return '?' . http_build_query($query);
 }
 
-// Функция для установки выбранного языка в сессии
-function set_language($language) {
-    $_SESSION['language'] = $language;
-}
-
 // Функция для перенаправления на другую страницу
 function redirect($url) {
     header("Location: $url");
