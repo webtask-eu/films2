@@ -1,5 +1,5 @@
-/* Стили для поля Description в форме создания коллекции */
-.collection-form .form-group textarea {
+/* Стили для поля описания в форме создания коллекции */
+form .form-group textarea {
     width: 100%;
     padding: 10px;
     font-size: 14px;
@@ -9,7 +9,7 @@
     resize: vertical;
 }
 
-.collection-form .form-group textarea:focus {
+form .form-group textarea:focus {
     outline: none;
     border-color: #003da5;
     box-shadow: 0 0 0 2px rgba(0, 61, 165, 0.3);
