@@ -219,16 +219,22 @@ function login_user_by_email($email, $password) {
  *
  * @param int $user_id Идентификатор пользователя
  * @return array Массив с информацией о коллекциях пользователя
+ * @throws PDOException Если произошла ошибка при выполнении запроса
  */
 function get_user_collections($user_id)
 {
     global $db;
 
-    $query = $db->prepare("SELECT * FROM collections WHERE user_id = :user_id");
-    $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $query->execute();
+    try {
+        $query = $db->prepare("SELECT * FROM collections WHERE user_id = :user_id");
+        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $query->execute();
 
-    return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        // Обработка ошибки при выполнении запроса
+        throw new PDOException('Error retrieving user collections: ' . $e->getMessage());
+    }
 }
 
 /**
@@ -238,15 +244,21 @@ function get_user_collections($user_id)
  * @param string $name Название коллекции
  * @param string $description Описание коллекции
  * @return bool Возвращает true в случае успешного создания коллекции, иначе false
+ * @throws PDOException Если произошла ошибка при выполнении запроса
  */
 function create_collection($user_id, $name, $description)
 {
     global $db;
 
-    $query = $db->prepare("INSERT INTO collections (user_id, name, description) VALUES (:user_id, :name, :description)");
-    $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $query->bindParam(':name', $name, PDO::PARAM_STR);
-    $query->bindParam(':description', $description, PDO::PARAM_STR);
+    try {
+        $query = $db->prepare("INSERT INTO collections (user_id, name, description) VALUES (:user_id, :name, :description)");
+        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->bindParam(':description', $description, PDO::PARAM_STR);
 
-    return $query->execute();
+        return $query->execute();
+    } catch (PDOException $e) {
+        // Обработка ошибки при выполнении запроса
+        throw new PDOException('Error creating collection: ' . $e->getMessage());
+    }
 }
