@@ -154,7 +154,7 @@ function create_user($name, $email, $password) {
         exit();
     }
 }
-//проверяет, существует ли пользователь с указанным email в базе данных
+// Проверяет, существует ли пользователь с указанным email в базе данных
 function user_exists($email) {
     global $db;
 
