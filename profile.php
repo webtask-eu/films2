@@ -1,55 +1,66 @@
-<?php
-require_once __DIR__ . '/config.php';
+Извините за пропуск! Вот обновленный код `register.php`, включающий меню и учет путей в конфигурационном файле:
 
-// Проверка авторизации пользователя
-if (!is_logged_in()) {
-    // Если пользователь не авторизован, перенаправляем на страницу входа
-    redirect('/login.php');
+```php
+<?php
+require_once __DIR__ . 'config.php';
+
+// Проверка, если пользователь уже авторизован, перенаправление на страницу профиля
+if (is_logged_in()) {
+    redirect('/profile.php');
 }
 
-// Получение информации о текущем пользователе
-$user_id = $_SESSION['user_id'];
-$user = get_user($user_id);
-
-// Обработка изменений данных пользователя
+// Обработка формы регистрации
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Получение данных из формы
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Обновление информации о пользователе
-    update_user($user_id, $name, $email, $password);
-    
-    // Перенаправление на страницу профиля
-    redirect('/profile.php');
-}
+    // Создание пользователя
+    $result = create_user($name, $email, $password);
 
+    if ($result) {
+        // Успешная регистрация, перенаправление на страницу профиля
+        redirect('/profile.php');
+    } else {
+        // Ошибка регистрации
+        $error_message = 'Registration failed. Please try again.';
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>My Profile</title>
+    <title>Registration</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <?php include_once __DIR__ . '/includes/menu.php'; ?>
+    <?php include ROOT_PATH . '/menu.php'; ?>
 
-    <main>
-        <h1>My Profile</h1>
-        <form method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="<?php echo $user['name']; ?>" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Save</button>
+    <div class="container">
+        <h1>Registration</h1>
+        <?php if (isset($error_message)) { ?>
+            <p class="error"><?php echo $error_message; ?></p>
+        <?php } ?>
+        <form method="POST" action="register.php">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <button type="submit">Register</button>
+            </div>
         </form>
-    </main>
+    </div>
 </body>
 </html>
