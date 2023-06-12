@@ -3,7 +3,7 @@ require_once __DIR__ . '/config.php';
 
 // Проверка, если пользователь уже авторизован, перенаправляем на главную страницу
 if (is_logged_in()) {
-    redirect('/index.php');
+    redirect('/profile.php');
 }
 
 // Переменные для хранения данных формы
