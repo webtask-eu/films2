@@ -44,9 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <header>
         <?php include_once __DIR__ . '/menu.php'; ?>
-        <?php if (is_logged_in()) { ?>
-        <?php include_once __DIR__ . '/submenu.php'; ?>    
-        <?php } ?>
+        
     </header>
     <div class="container">
         <h1><?php echo translate('Login'); ?></h1>
