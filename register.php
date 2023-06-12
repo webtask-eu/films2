@@ -21,13 +21,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($name) || empty($email) || empty($password)) {
         $error_message = 'Please fill in all fields.';
     } else {
-        // Попытка создания нового пользователя
-        $result = create_user($name, $email, $password);
-        if ($result['success']) {
-            // Перенаправление на страницу профиля
-            header("Location: /profile.php");
+        // Проверка, если пользователь уже существует
+        if (user_exists($email)) {
+            $error_message = 'User with this email already exists.';
         } else {
-            $error_message = $result['message'];
+            // Попытка создания нового пользователя
+            $result = create_user($name, $email, $password);
+            if ($result['success']) {
+                // Перенаправление на страницу профиля
+                redirect('/profile.php');
+            } else {
+                $error_message = $result['message'];
+            }
         }
     }
 }
@@ -42,9 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="/css/registration.css">
 </head>
 <body>
-<header>
-    <?php include_once __DIR__ . '/menu.php'; ?>
-</header>
+    <header>
+        <?php include_once __DIR__ . '/menu.php'; ?>
+    </header>
     <div class="container">
         <h1><?php echo translate('Register'); ?></h1>
         <?php if ($error_message) { ?>
