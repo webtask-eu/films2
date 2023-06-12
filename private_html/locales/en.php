@@ -1,16 +1,20 @@
 <?php
-// en.php
+
 return [
     'Home' => 'Home',
     'Register' => 'Register',
     'Login' => 'Login',
     'Create Collection' => 'Create Collection',
-    'My Collections' => 'My Collections',
-    'Latest Movies' => 'Latest Movies',
-    'No movies found.' => 'No movies found.',
-    'Film Collection' => 'Film Collection',
     'EN' => 'EN',
     'LV' => 'LV',
     'RU' => 'RU',
+    'Latest Movies' => 'Latest Movies',
+    'No movies found.' => 'No movies found.',
     'My Collections' => 'My Collections',
+    'Film Collection' => 'Film Collection',
+    'Name' => 'Name',
+    'Email' => 'Email',
+    'Password' => 'Password',
 ];
+
+?>
