@@ -35,8 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="/css/profile.css">
 </head>
 <body>
+    <header>
     <?php include_once __DIR__ . '/menu.php'; ?>
-
+</header>
     <main>
         <h1>My Profile</h1>
         <form method="POST">
