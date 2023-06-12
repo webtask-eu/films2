@@ -17,6 +17,8 @@ return [
     'Password' => 'Parole',
     'Save' => 'Saglabāt',
     'My Profile' => 'Mans profils',
+    'Add Movie' => 'Pievienot Filmu',
+    'Logout' => 'Izrakstīties',
 ];
 
 ?>
