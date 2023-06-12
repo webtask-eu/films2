@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Попытка создания нового пользователя
         $result = create_user($name, $email, $password);
         if ($result['success']) {
-            // Успешная регистрация, перенаправление на страницу входа
-            redirect('/login.php');
+            // Перенаправление на страницу профиля
+            header("Location: /profile.php");
         } else {
             $error_message = $result['message'];
         }

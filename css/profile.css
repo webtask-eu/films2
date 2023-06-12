@@ -1,0 +1,62 @@
+/* Стили для контейнера профиля */
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Стили для заголовка профиля */
+  .profile-header {
+    margin-bottom: 20px;
+  }
+  
+  .profile-header h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Стили для формы профиля */
+  .profile-form {
+    margin-top: 20px;
+  }
+  
+  .profile-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .profile-form input[type="text"],
+  .profile-form input[type="email"],
+  .profile-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-form button {
+    padding: 10px 20px;
+    background-color: #003da5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .profile-form button:hover {
+    background-color: #002f80;
+  }
+  
+  .profile-form .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .profile-form .success-message {
+    color: green;
+    margin-top: 10px;
+  }
+  
