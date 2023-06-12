@@ -1,8 +1,5 @@
 <?php
 require_once 'db_connect.php'; // Подключаем файл с подключением к базе данных
-// Подключаем файл с подключением к базе данных
-$db = new DB(); // Создаем объект для работы с базой данных
-
 
 // Функция для перевода текста
 function translate($text) {
@@ -53,19 +50,21 @@ function is_logged_in() {
 
 // Функция для получения списка последних фильмов
 function get_latest_movies() {
+    global $db;
 
-    // Выполняем SQL-запрос для выборки последних фильмов
-    $result = $db->query('SELECT * FROM movies ORDER BY id DESC LIMIT 10');
-
-    // Проверяем, есть ли результаты запроса
-    if ($result) {
-        $movies = $result->fetchAll(PDO::FETCH_ASSOC); // Получаем список фильмов в виде ассоциативного массива
-        return $movies;
-    } else {
-        echo 'Failed to fetch movies.';
-        return [];
+    try {
+        // Выборка последних 10 фильмов из базы данных
+        $query = 'SELECT * FROM movies ORDER BY id DESC LIMIT 10';
+        $statement = $db->query($query);
+        $movies = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        // В случае ошибки выборки вывести сообщение об ошибке
+        die('Failed to get latest movies: ' . $e->getMessage());
     }
+
+    return $movies;
 }
+
 
 
 // Функция для получения имени пользователя
