@@ -70,14 +70,15 @@ $success_message = get_success_message();
             <p class="success"><?php echo $success_message; ?></p>
         <?php } ?>
         <?php if (!empty($latestMovies)) { ?>
-            <ul>
-                <?php foreach ($latestMovies as $movie) { ?>
-                    <li><?php echo $movie; ?></li>
-                <?php } ?>
-            </ul>
-        <?php } else { ?>
-            <p><?php echo translate('No movies found.'); ?></p>
+    <ul>
+        <?php foreach ($latestMovies as $movie) { ?>
+            <li><?php echo $movie['title']; ?></li>
         <?php } ?>
+    </ul>
+    <?php } else { ?>
+        <p><?php echo translate('No movies found.'); ?></p>
+    <?php } ?>
+
 
                <!-- Debug Info -->
         <pre>
