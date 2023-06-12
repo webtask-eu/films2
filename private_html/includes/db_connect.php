@@ -1,6 +1,6 @@
 <?php
 
-require_once INCLUDES_PATH . '/config.php';
+require_once __DIR__ . '/../../config.php';
 
 $host = 'localhost';
 $port = '3306';
