@@ -55,6 +55,12 @@ nav {
     align-items: center;
   }
   
+  /* Стили для центрирования пунктов меню */
+  li.center {
+    margin: 0 auto;
+  }
+  
+  
 
 .logo {
     float: left;
