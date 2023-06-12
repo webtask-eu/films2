@@ -41,48 +41,30 @@ $collections = get_user_collections($user_id);
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>My Collections</title>
+    <title><?php echo translate('Create Collection'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/submenu.css">
+    <link rel="stylesheet" href="/css/registration.css">
 </head>
 <body>
     <header>
         <?php include_once __DIR__ . '/menu.php'; ?>
-        <?php if (is_logged_in()) { ?>
-        <?php include_once __DIR__ . '/submenu.php'; ?>    
-        <?php } ?>
     </header>
     <div class="container">
-        <h1>My Collections</h1>
-        <h2>Create Collection</h2>
+        <h1><?php echo translate('Create Collection'); ?></h1>
         <?php if ($error_message) { ?>
             <p class="error"><?php echo $error_message; ?></p>
         <?php } ?>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>">
+                <label for="name"><?php echo translate('Name'); ?>:</label>
+                <input type="text" id="name" name="name" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
             </div>
             <div class="form-group">
-                <label for="description">Description:</label>
-                <textarea id="description" name="description"><?php echo htmlspecialchars($description); ?></textarea>
+                <label for="description"><?php echo translate('Description'); ?>:</label>
+                <textarea id="description" name="description"><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
             </div>
-            <button type="submit">Create</button>
+            <button type="submit"><?php echo translate('Create'); ?></button>
         </form>
-        <h2>My Collections</h2>
-        <?php if (!empty($collections)) { ?>
-            <ul>
-                <?php foreach ($collections as $collection) { ?>
-                    <li>
-                        <a href="/collection.php?id=<?php echo $collection['id']; ?>">
-                            <?php echo $collection['name']; ?>
-                        </a>
-                    </li>
-                <?php } ?>
-            </ul>
-        <?php } else { ?>
-            <p>No collections found.</p>
-        <?php } ?>
     </div>
 </body>
 </html>
