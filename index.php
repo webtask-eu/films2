@@ -3,8 +3,6 @@ require_once __DIR__ . '/config.php';
 require_once INCLUDES_PATH . '/session_start.php';
 require_once INCLUDES_PATH . '/functions.php';
 
-<link rel="stylesheet" href="/css/style.css">
-
 
 
 // Загрузка переводов
