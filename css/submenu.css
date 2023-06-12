@@ -1,34 +1,25 @@
-/* Стили для подменю */
 .submenu {
-    background-color: #f0f0f0;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: flex-end; /* Выравнивание по правому краю */
+    background-color: #fff;
+    padding: 10px;
 }
 
-/* Стили для пунктов подменю */
 .submenu ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.submenu li {
+.submenu ul li {
     display: inline-block;
     margin-right: 10px;
 }
 
-.submenu li:last-child {
-    margin-right: 0;
-}
-
-/* Стили для ссылок в подменю */
-.submenu a {
-    color: #333;
+.submenu ul li a {
+    color: #003da5;
     text-decoration: none;
-    padding: 5px 10px;
 }
 
-.submenu a:hover {
-    text-decoration: underline;
+.submenu ul li.active a {
+    color: #000;
+    font-weight: bold;
 }
