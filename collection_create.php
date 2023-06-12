@@ -44,11 +44,13 @@ $collections = get_user_collections($user_id);
     <title><?php echo translate('Create Collection'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/registration.css">
+    <link rel="stylesheet" href="/css/submenu.css">
 </head>
 <body>
     <header>
         <?php include_once __DIR__ . '/menu.php'; ?>
     </header>
+    <?php include_once __DIR__ . '/submenu.php'; ?>
     <div class="container">
         <h1><?php echo translate('Create Collection'); ?></h1>
         <?php if ($error_message) { ?>
