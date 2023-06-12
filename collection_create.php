@@ -1,7 +1,5 @@
 <?php
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/includes/session_start.php';
-require_once __DIR__ . '/includes/functions.php';
 
 // Проверка авторизации пользователя
 if (!is_logged_in()) {
