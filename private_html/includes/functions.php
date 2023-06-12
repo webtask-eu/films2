@@ -213,3 +213,40 @@ function login_user_by_email($email, $password) {
     // Если авторизация не удалась, возвращаем ошибку
     return ['success' => false, 'message' => 'Invalid email or password.'];
 }
+
+/**
+ * Получает коллекции пользователя из базы данных.
+ *
+ * @param int $user_id Идентификатор пользователя
+ * @return array Массив с информацией о коллекциях пользователя
+ */
+function get_user_collections($user_id)
+{
+    global $db;
+
+    $query = $db->prepare("SELECT * FROM collections WHERE user_id = :user_id");
+    $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $query->execute();
+
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Создает новую коллекцию в базе данных.
+ *
+ * @param int $user_id Идентификатор пользователя
+ * @param string $name Название коллекции
+ * @param string $description Описание коллекции
+ * @return bool Возвращает true в случае успешного создания коллекции, иначе false
+ */
+function create_collection($user_id, $name, $description)
+{
+    global $db;
+
+    $query = $db->prepare("INSERT INTO collections (user_id, name, description) VALUES (:user_id, :name, :description)");
+    $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $query->bindParam(':name', $name, PDO::PARAM_STR);
+    $query->bindParam(':description', $description, PDO::PARAM_STR);
+
+    return $query->execute();
+}
