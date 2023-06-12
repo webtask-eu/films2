@@ -99,7 +99,7 @@ function load_translations() {
             echo "Localization file not found: $file";
         }
     }
-
+/*
     // Отладочная информация
     echo $localePath . "<br>";
     echo "<pre>";
