@@ -13,3 +13,17 @@ require_once INCLUDES_PATH . '/functions.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+// Загрузка переводов
+$translations = load_translations();
+
+// Получение языка из параметра GET
+if (isset($_GET['lang'])) {
+    $lang = $_GET['lang'];
+
+    // Установка языка
+    set_language($lang);
+}
+
+// Получение текущего языка
+$currentLanguage = get_language();
