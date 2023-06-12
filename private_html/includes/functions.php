@@ -170,3 +170,20 @@ function user_exists($email) {
         die('Database error: ' . $e->getMessage());
     }
 }
+
+// Для получения информации о пользователе из базы данных
+function get_user($userId) {
+    global $db;
+
+    try {
+        $query = "SELECT * FROM users WHERE id = :userId";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $user;
+    } catch (PDOException $e) {
+        die('Failed to fetch user: ' . $e->getMessage());
+    }
+}
