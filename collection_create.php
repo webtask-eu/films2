@@ -1,7 +1,5 @@
 <?php
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/includes/session_start.php';
-require_once __DIR__ . '/includes/functions.php';
 
 // Проверка авторизации пользователя
 if (!is_logged_in()) {
@@ -45,10 +43,14 @@ $collections = get_user_collections($user_id);
     <meta charset="UTF-8">
     <title>My Collections</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/submenu.css">
 </head>
 <body>
     <header>
         <?php include_once __DIR__ . '/menu.php'; ?>
+        <?php if (is_logged_in()) { ?>
+        <?php include_once __DIR__ . '/submenu.php'; ?>    
+        <?php } ?>
     </header>
     <div class="container">
         <h1>My Collections</h1>
