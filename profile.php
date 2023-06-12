@@ -1,3 +1,4 @@
+
 <?php
 require_once __DIR__ . '/config.php';
 
@@ -30,32 +31,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><?php echo translate('My Profile'); ?></title>
+    <title>My Profile</title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/profile.css">
-    <link rel="stylesheet" href="/css/submenu.css">
+    <link rel="stylesheet" href="/css/registration.css">
 </head>
 <body>
-    <header>
+<header>
         <?php include_once __DIR__ . '/menu.php'; ?>
         <?php if (is_logged_in()) { ?>
         <?php include_once __DIR__ . '/submenu.php'; ?>    
         <?php } ?>
     </header>
-    <main>
-        <h1><?php echo translate('My Profile'); ?></h1>
-        <form method="POST">
-            <label for="name"><?php echo translate('Name'); ?>:</label>
-            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
-
-            <label for="email"><?php echo translate('Email'); ?>:</label>
-            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
-
-            <label for="password"><?php echo translate('Password'); ?>:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit"><?php echo translate('Save'); ?></button>
+    <div class="container">
+        <h1>My Profile</h1>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <button type="submit">Save</button>
         </form>
-    </main>
+    </div>
 </body>
 </html>
