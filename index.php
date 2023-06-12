@@ -17,7 +17,9 @@ $success_message = get_success_message();
     <meta charset="UTF-8">
     <title><?php echo translate('Film Collection'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/submenu.css">
+    <?php if (is_logged_in()) { ?>
+        <link rel="stylesheet" href="/css/submenu.css">
+    <?php } ?>
 </head>
 <body>
 <header>
