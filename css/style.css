@@ -11,7 +11,8 @@ header {
 
 /* Стили для основного контейнера меню */
 nav {
-    background-color: #1f395f;
+    background-color: #003da5;
+    padding: 10px 20px;
   }
   
   /* Стили для списка пунктов меню */
@@ -53,6 +54,7 @@ nav {
     display: flex;
     align-items: center;
   }
+  
 
 .logo {
     float: left;
