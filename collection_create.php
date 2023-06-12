@@ -45,6 +45,7 @@ $collections = get_user_collections($user_id);
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/registration.css">
     <link rel="stylesheet" href="/css/submenu.css">
+    <link rel="stylesheet" href="/css/collections.css">
 </head>
 <body>
     <header>
