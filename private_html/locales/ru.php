@@ -15,6 +15,8 @@ return [
     'Name' => 'Имя',
     'Email' => 'Email',
     'Password' => 'Пароль',
+    'Save' => 'Сохранить',
+    'My Profile' => 'Мой профиль',
 ];
 
 ?>
