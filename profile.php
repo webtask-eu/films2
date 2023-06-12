@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include_once __DIR__ . '/menu.php'; ?>
         <?php if (is_logged_in()) { ?>
         <?php include_once __DIR__ . '/submenu.php'; ?>    
-    <?php } ?>
+        <?php } ?>
     </header>
     <main>
         <h1><?php echo translate('My Profile'); ?></h1>
