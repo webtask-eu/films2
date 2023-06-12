@@ -51,9 +51,23 @@ function is_logged_in() {
 
 // Функция для получения списка последних фильмов
 function get_latest_movies() {
-    // Здесь вам нужно добавить код для получения списка последних фильмов из базы данных
-    // Возвращайте список фильмов в нужном формате, например, в виде массива
+    require_once 'db_connect.php'; // Подключаем файл с подключением к базе данных
+
+    $db = new DB(); // Создаем объект для работы с базой данных
+
+    // Выполняем SQL-запрос для выборки последних фильмов
+    $result = $db->query('SELECT * FROM movies ORDER BY id DESC LIMIT 10');
+
+    // Проверяем, есть ли результаты запроса
+    if ($result) {
+        $movies = $result->fetchAll(PDO::FETCH_ASSOC); // Получаем список фильмов в виде ассоциативного массива
+        return $movies;
+    } else {
+        echo 'Failed to fetch movies.';
+        return [];
+    }
 }
+
 
 // Функция для получения имени пользователя
 function get_user_name() {
