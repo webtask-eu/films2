@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>My Profile</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/submenu.css">
     <link rel="stylesheet" href="/css/registration.css">
 </head>
 <body>
