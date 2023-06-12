@@ -1,7 +1,5 @@
 <?php
 require_once __DIR__ . '/config.php';
-require_once INCLUDES_PATH . '/session_start.php';
-require_once INCLUDES_PATH . '/functions.php';
 
 // Проверка, если пользователь уже авторизован, перенаправляем на главную страницу
 if (is_logged_in()) {
