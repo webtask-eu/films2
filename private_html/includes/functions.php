@@ -154,3 +154,19 @@ function create_user($name, $email, $password) {
         exit();
     }
 }
+
+function user_exists($email) {
+    global $db;
+
+    try {
+        $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $count = $stmt->fetchColumn();
+
+        return ($count > 0);
+    } catch (PDOException $e) {
+        die('Database error: ' . $e->getMessage());
+    }
+}
