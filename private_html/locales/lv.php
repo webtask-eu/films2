@@ -15,6 +15,8 @@ return [
     'Name' => 'Vārds',
     'Email' => 'E-pasts',
     'Password' => 'Parole',
+    'Save' => 'Saglabāt',
+    'My Profile' => 'Mans profils',
 ];
 
 ?>
