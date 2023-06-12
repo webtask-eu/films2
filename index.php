@@ -21,6 +21,7 @@ $success_message = get_success_message();
 <body>
 <header>
     <?php include_once __DIR__ . '/menu.php'; ?>
+    <link rel="stylesheet" href="/css/submenu.css">
 </header>
 
 
