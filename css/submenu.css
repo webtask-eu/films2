@@ -13,9 +13,14 @@
     margin: 0 10px;
   }
   
-  /* Стили для пунктов субменю в центре */
-  .submenu .center-items {
-    margin: 0 auto;
+  /* Стили для пунктов субменю слева */
+  .submenu .left-items {
+    margin-right: auto;
+  }
+  
+  /* Стили для пунктов субменю справа */
+  .submenu .right-items {
+    margin-left: auto;
   }
   
   /* Стили для активного пункта субменю */
