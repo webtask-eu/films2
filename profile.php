@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>My Profile</title>
+    <title><?php echo translate('My Profile'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/profile.css">
 </head>
@@ -39,18 +39,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include_once __DIR__ . '/menu.php'; ?>
     </header>
     <main>
-        <h1>My Profile</h1>
+        <h1><?php echo translate('My Profile'); ?></h1>
         <form method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="<?php echo $user['name']; ?>" required>
+            <label for="name"><?php echo translate('Name'); ?>:</label>
+            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required>
+            <label for="email"><?php echo translate('Email'); ?>:</label>
+            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
 
-            <label for="password">Password:</label>
+            <label for="password"><?php echo translate('Password'); ?>:</label>
             <input type="password" id="password" name="password" required>
 
-            <button type="submit">Save</button>
+            <button type="submit"><?php echo translate('Save'); ?></button>
         </form>
     </main>
 </body>
