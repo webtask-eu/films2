@@ -19,6 +19,8 @@ return [
     'My Profile' => 'My Profile',
     'Add Movie' => 'Add Movie',
     'Logout' => 'Logout',
+    'Description' => 'Description',
+    'Create' => 'Create',
 ];
 
 ?>
