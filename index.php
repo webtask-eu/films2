@@ -17,11 +17,12 @@ $success_message = get_success_message();
     <meta charset="UTF-8">
     <title><?php echo translate('Film Collection'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/submenu.css">
 </head>
 <body>
 <header>
     <?php include_once __DIR__ . '/menu.php'; ?>
-    <link rel="stylesheet" href="/css/submenu.css">
+
 </header>
 
 
