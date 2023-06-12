@@ -43,19 +43,15 @@ $success_message = get_success_message();
 <header>
   <nav>
     <ul>
-      <li class="menu-items"><a href="/index.php"><?php echo translate('Home'); ?></a></li>
-      <?php if (is_logged_in()) { ?>
-        <li class="menu-items"><a href="/collection_create.php"><?php echo translate('Create Collection'); ?></a></li>
-      <?php } else { ?>
-        <li class="menu-items"><a href="/register.php"><?php echo translate('Register'); ?></a></li>
-        <li class="menu-items"><a href="/login.php"><?php echo translate('Login'); ?></a></li>
-      <?php } ?>
+      <li class="menu-items center"><a href="/register.php"><?php echo translate('Register'); ?></a></li>
+      <li class="menu-items center"><a href="/login.php"><?php echo translate('Login'); ?></a></li>
       <li class="menu-items language"><a href="<?php echo update_query_param('lang', 'en'); ?>">EN</a></li>
       <li class="menu-items language"><a href="<?php echo update_query_param('lang', 'lv'); ?>">LV</a></li>
       <li class="menu-items language"><a href="<?php echo update_query_param('lang', 'ru'); ?>">RU</a></li>
     </ul>
   </nav>
 </header>
+
 
     <main>
     <h1><?php echo translate('Latest Movies'); ?></h1>
