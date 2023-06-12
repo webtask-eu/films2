@@ -127,3 +127,30 @@ function load_translations() {
 
 // Загрузка переводов
 $translations = load_translations();
+
+function create_user($name, $email, $password) {
+    global $db;
+
+    try {
+        // Хэширование пароля
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // Подготовка SQL-запроса
+        $stmt = $db->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
+
+        // Привязка параметров
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashedPassword);
+
+        // Выполнение запроса
+        $stmt->execute();
+
+        // Возвращаем ID нового пользователя
+        return $db->lastInsertId();
+    } catch (PDOException $e) {
+        // Обработка ошибки
+        echo 'Error creating user: ' . $e->getMessage();
+        exit();
+    }
+}
