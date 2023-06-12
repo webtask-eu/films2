@@ -25,14 +25,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (user_exists($email)) {
             $error_message = 'User with this email already exists.';
         } else {
-            // Попытка создания нового пользователя
+           // Попытка создания нового пользователя
             $result = create_user($name, $email, $password);
             if ($result['success']) {
+                // Получение ID только что созданного пользователя
+                $user_id = $result['user_id'];
+
+                // Установка сессионной переменной для авторизации
+                $_SESSION['user_id'] = $user_id;
+
                 // Перенаправление на страницу профиля
-                redirect('/profile.php');
+                header("Location: /profile.php");
+                exit();
             } else {
                 $error_message = $result['message'];
             }
+
         }
     }
 }
