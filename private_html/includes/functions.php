@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../db_connect.php'; // Подключаем файл с подключением к базе данных
 
 
 // Функция для перевода текста
@@ -51,7 +51,6 @@ function is_logged_in() {
 
 // Функция для получения списка последних фильмов
 function get_latest_movies() {
-    require_once 'db_connect.php'; // Подключаем файл с подключением к базе данных
 
     $db = new DB(); // Создаем объект для работы с базой данных
 
