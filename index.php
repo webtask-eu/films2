@@ -37,7 +37,7 @@ $success_message = get_success_message();
 </head>
 <body>
 <header>
-<?php include_once __DIR__ . '/menu.php'; ?>
+    <?php include_once __DIR__ . '/menu.php'; ?>
 </header>
 
 
