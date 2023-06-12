@@ -187,3 +187,29 @@ function get_user($userId) {
         die('Failed to fetch user: ' . $e->getMessage());
     }
 }
+
+function login_user_by_email($email, $password) {
+    global $db;
+    
+    // Подготовка запроса для выборки пользователя по электронной почте
+    $query = $db->prepare("SELECT * FROM users WHERE email = :email");
+    $query->bindParam(':email', $email);
+    $query->execute();
+    
+    // Проверка наличия пользователя в базе данных
+    if ($query->rowCount() > 0) {
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+        
+        // Проверка совпадения пароля
+        if (password_verify($password, $user['password'])) {
+            // Авторизация пользователя
+            $_SESSION['user_id'] = $user['id'];
+            
+            // Возвращаем успешный результат
+            return ['success' => true];
+        }
+    }
+    
+    // Если авторизация не удалась, возвращаем ошибку
+    return ['success' => false, 'message' => 'Invalid email or password.'];
+}
