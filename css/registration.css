@@ -54,3 +54,20 @@ button[type="submit"] {
     color: red;
     margin-bottom: 10px;
 }
+
+/* Стили для поля Description */
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: #003da5;
+    box-shadow: 0 0 0 2px rgba(0, 61, 165, 0.3);
+}
