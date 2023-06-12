@@ -19,6 +19,8 @@ return [
     'My Profile' => 'Мой профиль',
     'Add Movie' => 'Добавить фильм',
     'Logout' => 'Выход',
+    'Description' => 'Описание',
+    'Create' => 'Создать',
 ];
 
 ?>
