@@ -55,6 +55,23 @@ nav {
     align-items: center;
   }
   
+  /* Стили для названия сайта */
+  nav ul li.site-title {
+    font-weight: bold;
+  }
+  
+  /* Стили для пунктов меню справа */
+  nav ul li.right {
+    margin-left: auto;
+  }
+  
+  /* Стили для пунктов меню по центру */
+  nav ul li.center {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  
   /* Стили для центрирования пунктов меню */
   li.center {
     margin: 0 auto;
