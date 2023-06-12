@@ -25,7 +25,7 @@ $success_message = get_success_message();
 <header>
     <?php include_once __DIR__ . '/menu.php'; ?>
     <?php if (is_logged_in()) { ?>
-        <?php include_once __DIR__ . '/menu.php'; ?>    
+        <?php include_once __DIR__ . '/submenu.php'; ?>    
     <?php } ?>
 
 </header>
