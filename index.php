@@ -62,29 +62,28 @@ $success_message = get_success_message();
         </nav>
     </header>
     <main>
-        <h1><?php echo translate('Latest Movies'); ?></h1>
-        <?php if ($error_message) { ?>
-            <p class="error"><?php echo $error_message; ?></p>
-        <?php } ?>
-        <?php if ($success_message) { ?>
-            <p class="success"><?php echo $success_message; ?></p>
-        <?php } ?>
-        <?php if (!empty($latestMovies)) { ?>
-    <ul>
-        <?php foreach ($latestMovies as $movie) { ?>
-            <li><?php echo $movie['title']; ?></li>
-        <?php } ?>
-    </ul>
+    <h1><?php echo translate('Latest Movies'); ?></h1>
+    <?php if ($error_message) { ?>
+        <p class="error"><?php echo $error_message; ?></p>
+    <?php } ?>
+    <?php if ($success_message) { ?>
+        <p class="success"><?php echo $success_message; ?></p>
+    <?php } ?>
+    <?php if (!empty($latestMovies)) { ?>
+        <ul class="movie-list">
+            <?php foreach ($latestMovies as $movie) { ?>
+                <li><?php echo $movie['title']; ?></li>
+            <?php } ?>
+        </ul>
     <?php } else { ?>
         <p><?php echo translate('No movies found.'); ?></p>
     <?php } ?>
 
+    <!-- Debug Info -->
+    <pre>
+        <?php //var_dump($latestMovies); ?>
+    </pre>
+</main>
 
-               <!-- Debug Info -->
-        <pre>
-            <?php //var_dump($latestMovies); ?>
-        </pre>
-
-    </main>
 </body>
 </html>
