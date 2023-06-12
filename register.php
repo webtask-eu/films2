@@ -44,6 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="/css/registration.css">
 </head>
 <body>
+<header>
+    <?php include_once __DIR__ . '/menu.php'; ?>
+</header>
     <div class="container">
         <h1><?php echo translate('Register'); ?></h1>
         <?php if ($error_message) { ?>
