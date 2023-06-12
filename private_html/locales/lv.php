@@ -19,6 +19,8 @@ return [
     'My Profile' => 'Mans profils',
     'Add Movie' => 'Pievienot Filmu',
     'Logout' => 'Izrakstīties',
+    'Description' => 'Apraksts',
+    'Create' => 'Izveidot',
 ];
 
 ?>
