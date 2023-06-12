@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/includes/session_start.php';
+require_once __DIR__ . '/includes/functions.php';
 
 // Проверка авторизации пользователя
 if (!is_logged_in()) {
@@ -31,24 +33,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+// Получение коллекций текущего пользователя
+$user_id = $_SESSION['user_id'];
+$collections = get_user_collections($user_id);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Create Collection</title>
+    <title>My Collections</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <header>
         <?php include_once __DIR__ . '/menu.php'; ?>
-        <?php if (is_logged_in()) { ?>
-        <?php include_once __DIR__ . '/submenu.php'; ?>    
-        <?php } ?>
     </header>
     <div class="container">
-        <h1>Create Collection</h1>
+        <h1>My Collections</h1>
+        <h2>Create Collection</h2>
         <?php if ($error_message) { ?>
             <p class="error"><?php echo $error_message; ?></p>
         <?php } ?>
@@ -63,6 +67,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit">Create</button>
         </form>
+        <h2>My Collections</h2>
+        <?php if (!empty($collections)) { ?>
+            <ul>
+                <?php foreach ($collections as $collection) { ?>
+                    <li>
+                        <a href="/collection.php?id=<?php echo $collection['id']; ?>">
+                            <?php echo $collection['name']; ?>
+                        </a>
+                    </li>
+                <?php } ?>
+            </ul>
+        <?php } else { ?>
+            <p>No collections found.</p>
+        <?php } ?>
     </div>
 </body>
 </html>
