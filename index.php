@@ -79,9 +79,9 @@ $success_message = get_success_message();
             <p><?php echo translate('No movies found.'); ?></p>
         <?php } ?>
 
-                <!-- Debug Info -->
+               <!-- Debug Info -->
         <pre>
-            <?php var_dump($latestMovies); ?>
+            <?php //var_dump($latestMovies); ?>
         </pre>
 
     </main>
