@@ -15,6 +15,8 @@ return [
     'Name' => 'Name',
     'Email' => 'Email',
     'Password' => 'Password',
+    'Save' => 'Save',
+    'My Profile' => 'My Profile',
 ];
 
 ?>
