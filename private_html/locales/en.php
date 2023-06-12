@@ -17,6 +17,8 @@ return [
     'Password' => 'Password',
     'Save' => 'Save',
     'My Profile' => 'My Profile',
+    'Add Movie' => 'Add Movie',
+    'Logout' => 'Logout',
 ];
 
 ?>
