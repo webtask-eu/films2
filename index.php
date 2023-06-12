@@ -1,23 +1,6 @@
 <?php
 require_once __DIR__ . '/config.php';
 
-// Загрузка переводов
-$translations = load_translations();
-
-// Получение языка из параметра GET
-if (isset($_GET['lang'])) {
-    $lang = $_GET['lang'];
-
-    // Установка языка
-    set_language($lang);
-
-    // Перенаправление на главную страницу
-    redirect('/index.php');
-}
-
-// Получение текущего языка
-$currentLanguage = get_language();
-
 // Получение последних фильмов
 $latestMovies = get_latest_movies();
 
