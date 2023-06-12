@@ -7,22 +7,22 @@ if (is_logged_in()) {
 }
 
 // Переменные для хранения данных формы
-$username = '';
+$email = '';
 $password = '';
 $error_message = '';
 
 // Обработка отправки формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Получение данных из формы
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
     // Валидация данных
-    if (empty($username) || empty($password)) {
-        $error_message = 'Please enter username and password.';
+    if (empty($email) || empty($password)) {
+        $error_message = 'Please enter email and password.';
     } else {
         // Попытка авторизации пользователя
-        $result = login_user($username, $password);
+        $result = login_user_by_email($email, $password);
         if ($result['success']) {
             // Авторизация успешна, перенаправление на страницу профиля
             redirect('/profile.php');
@@ -52,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php } ?>
         <form class="login-form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <div class="form-group">
-                <label for="username"><?php echo translate('Username'); ?>:</label>
-                <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>">
+                <label for="email"><?php echo translate('Email'); ?>:</label>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>">
             </div>
             <div class="form-group">
                 <label for="password"><?php echo translate('Password'); ?>:</label>
