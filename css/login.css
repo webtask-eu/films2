@@ -1,0 +1,48 @@
+/* Стили для формы логина */
+form.login-form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  form.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  form.login-form .form-group {
+    margin-bottom: 10px;
+  }
+  
+  form.login-form .form-group label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  form.login-form .form-group input[type="text"],
+  form.login-form .form-group input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  form.login-form button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #003da5;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  form.login-form button[type="submit"]:hover {
+    background-color: #002060;
+  }
+  

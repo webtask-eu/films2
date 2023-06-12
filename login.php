@@ -7,23 +7,24 @@ if (is_logged_in()) {
 }
 
 // Переменные для хранения данных формы
-$email = $password = '';
+$username = '';
+$password = '';
 $error_message = '';
 
 // Обработка отправки формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Получение данных из формы
-    $email = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
     // Валидация данных
-    if (empty($email) || empty($password)) {
-        $error_message = 'Please fill in all fields.';
+    if (empty($username) || empty($password)) {
+        $error_message = 'Please enter username and password.';
     } else {
-        // Попытка аутентификации пользователя
-        $result = authenticate_user($email, $password);
+        // Попытка авторизации пользователя
+        $result = login_user($username, $password);
         if ($result['success']) {
-            // Успешная аутентификация, перенаправление на страницу профиля
+            // Авторизация успешна, перенаправление на страницу профиля
             redirect('/profile.php');
         } else {
             $error_message = $result['message'];
@@ -49,10 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($error_message) { ?>
             <p class="error"><?php echo $error_message; ?></p>
         <?php } ?>
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+        <form class="login-form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <div class="form-group">
-                <label for="email"><?php echo translate('Email'); ?>:</label>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>">
+                <label for="username"><?php echo translate('Username'); ?>:</label>
+                <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>">
             </div>
             <div class="form-group">
                 <label for="password"><?php echo translate('Password'); ?>:</label>
