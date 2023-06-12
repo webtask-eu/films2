@@ -1,6 +1,8 @@
 <?php
-require_once __DIR__ . '/private_html/includes/session_start.php';
-require_once __DIR__ . '/private_html/includes/functions.php';
+require_once __DIR__ . '/private_html/includes/config.php';
+require_once INCLUDES_PATH . '/session_start.php';
+require_once INCLUDES_PATH . '/functions.php';
+
 
 // Загрузка переводов
 $translations = load_translations();

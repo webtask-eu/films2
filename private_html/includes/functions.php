@@ -1,4 +1,7 @@
 <?php
+require_once INCLUDES_PATH . '/config.php';
+
+
 // Функция для перевода текста
 function translate($text) {
     global $translations;

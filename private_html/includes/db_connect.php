@@ -1,4 +1,7 @@
 <?php
+
+require_once INCLUDES_PATH . '/config.php';
+
 $host = 'localhost';
 $port = '3306';
 $dbname = 'films2';
