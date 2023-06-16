@@ -270,15 +270,14 @@ function translate_text($text, $targetLanguage) {
 }
 
 
-function create_collection($name, $description, $language) {
+function create_collection($name, $description) {
     try {
         global $db;
 
-        $query = "INSERT INTO collections (name, description, language) VALUES (:name, :description, :language)";
+        $query = "INSERT INTO collections (name, description) VALUES (:name, :description)";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':language', $language);
         $stmt->execute();
 
         return $db->lastInsertId();
@@ -286,7 +285,6 @@ function create_collection($name, $description, $language) {
         throw new Exception('Failed to create collection: ' . $e->getMessage());
     }
 }
-
 
 
 
