@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Автоматический перевод названия коллекции на другие языки
-        $translatedName = translate_text($name);
+        $translatedName = translate_text($name, $_SESSION['language']);
 
         // Создание коллекции
         $collectionId = create_collection($name, $description, $translatedName);
