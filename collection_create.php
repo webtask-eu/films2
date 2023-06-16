@@ -35,17 +35,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><?php echo translate('Create Collection'); ?></title>
+    <title>Create Collection</title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/collection_create.css">
+    <link rel="stylesheet" href="/css/registration.css">
 </head>
 <body>
     <header>
         <?php include_once __DIR__ . '/menu.php'; ?>
     </header>
-    <main>
-        <h1><?php echo translate('Create Collection'); ?></h1>
-        <form method="POST">
+    <div class="container">
+        <h1>Create Collection</h1>
+        <?php if ($error_message) { ?>
+            <p class="error"><?php echo $error_message; ?></p>
+        <?php } ?>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <div class="form-group">
                 <label for="name"><?php echo translate('Name'); ?>:</label>
                 <input type="text" id="name" name="name" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
@@ -54,4 +57,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="description"><?php echo translate('Description'); ?>:</label>
                 <textarea id="description" name="description"><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
             </div>
-            <button type="
+            <button type="submit"><?php echo translate('Create'); ?></button>
+        </form>
+    </div>
+</body>
+</html>
+Не забудьте подключить стили /css/style.css и /css/registration.css, а также файл меню menu.php в соответствующих местах. При необходимости, вы можете настроить стили в этих CSS файлах, чтобы достичь желаемого внешнего вида страницы.
+
+
+
+
+
+
