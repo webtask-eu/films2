@@ -17,7 +17,7 @@ $collections = get_user_collections($user_id);
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><?php echo translate('My Collections'); ?></title>
+    <title><?php echo translate('Collection'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/collections.css">
 </head>
@@ -26,19 +26,16 @@ $collections = get_user_collections($user_id);
         <?php include_once __DIR__ . '/menu.php'; ?>
     </header>
     <main>
-        <h1><?php echo translate('My Collections'); ?></h1>
-        <div class="collections">
-            <?php if (!empty($collections)) { ?>
-                <?php foreach ($collections as $collection) { ?>
-                    <div class="collection">
-                        <h2><?php echo $collection['name']; ?></h2>
-                        <p><?php echo $collection['description']; ?></p>
-                        <a href="/collection.php?id=<?php echo $collection['id']; ?>"><?php echo translate('View Collection'); ?></a>
-                    </div>
-                <?php } ?>
-            <?php } else { ?>
-                <p><?php echo translate('You have no collections.'); ?></p>
+        <div class="collection">
+            <?php if (isset($collection['name'])) { ?>
+                <h2><?php echo $collection['name']; ?></h2>
             <?php } ?>
+            <p><?php echo $collection['description']; ?></p>
+            <a href="/collection.php?id=<?php echo $collection['id']; ?>"><?php echo translate('View Collection'); ?></a>
+        </div>
+    </main>
+</body>
+</html>     <?php } ?>
         </div>
     </main>
 </body>
