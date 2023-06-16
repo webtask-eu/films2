@@ -1,12 +1,10 @@
 <?php
 require_once __DIR__ . '/config.php';
 
+// Переменные для хранения данных формы
+$name = '';
+$description = '';
 $error_message = '';
-
-// Проверка авторизации пользователя
-if (!is_logged_in()) {
-    redirect('/login.php');
-}
 
 // Обработка отправки формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,56 +12,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
 
-    try {
-        // Автоматический перевод названия коллекции на другие языки
-        $translatedName = translate_text($name, get_current_language());
-
+    // Валидация данных
+    if (empty($name)) {
+        $error_message = 'Please enter a name for the collection.';
+    } else {
         // Создание коллекции
-        $collectionId = create_collection($name, $description, $translatedName);
+        $result = create_collection($name, $description);
 
-        // Перенаправление на страницу с информацией о коллекции
-        redirect('/collections.php?id=' . $collectionId);
-    } catch (Exception $e) {
-        // Обработка ошибки 500
-        // Вывод сообщения об ошибке или другие действия
-
-        // Пример вывода сообщения об ошибке
-        echo 'Ошибка: ' . $e->getMessage();
+        // Проверка результата создания коллекции
+        if ($result['success']) {
+            // Коллекция успешно создана, перенаправление на страницу с коллекцией
+            redirect('/collections.php');
+        } else {
+            // Произошла ошибка при создании коллекции
+            $error_message = $result['message'];
+        }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Create Collection</title>
+    <title><?php echo translate('Create Collection'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/registration.css">
+    <link rel="stylesheet" href="/css/collection_create.css">
 </head>
 <body>
     <header>
         <?php include_once __DIR__ . '/menu.php'; ?>
     </header>
-    <div class="container">
-        <h1>Create Collection</h1>
-        <?php if ($error_message) { ?>
-            <p class="error"><?php echo $error_message; ?></p>
-        <?php } ?>
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-            <div class="form-group">
-                <label for="name"><?php echo translate('Name'); ?>:</label>
-                <input type="text" id="name" name="name" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
-            </div>
-            <div class="form-group">
-                <label for="description"><?php echo translate('Description'); ?>:</label>
-                <textarea id="description" name="description"><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
-            </div>
-            <button type="submit"><?php echo translate('Create'); ?></button>
-        </form>
-    </div>
+    <main>
+        <div class="container">
+            <h1><?php echo translate('Create Collection'); ?></h1>
+            <?php if ($error_message) { ?>
+                <p class="error"><?php echo $error_message; ?></p>
+            <?php } ?>
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                <div class="form-group">
+                    <label for="name"><?php echo translate('Name'); ?>:</label>
+                    <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="description"><?php echo translate('Description'); ?>:</label>
+                    <textarea id="description" name="description"><?php echo htmlspecialchars($description); ?></textarea>
+                </div>
+                <button type="submit"><?php echo translate('Create'); ?></button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
-
-
-
