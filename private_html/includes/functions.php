@@ -273,42 +273,40 @@ function translate_text($text, $targetLanguage) {
 function create_collection($user_id, $movie_id, $language) {
     try {
         global $db;
-
-        // Получение названия фильма
-        $query = "SELECT title FROM movies WHERE id = :movie_id";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':movie_id', $movie_id);
-        $stmt->execute();
-        $movie = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Перевод названия коллекции
-        $translated_title = translate_text($movie['title'], $language);
-
-        // Проверка, существует ли уже коллекция с таким пользователем и фильмом
-        $query = "SELECT * FROM collections WHERE user_id = :user_id AND movie_id = :movie_id";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->bindParam(':movie_id', $movie_id);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            return ['success' => false, 'message' => 'Collection already exists for this user and movie'];
+        
+        // Проверка существования пользователя
+        $user = get_user($user_id);
+        if (!$user) {
+            throw new Exception("User does not exist.");
         }
-
-        // Вставка новой коллекции
+        
+        // Проверка существования фильма
+        $movie = get_movie($movie_id);
+        if (!$movie) {
+            throw new Exception("Movie does not exist.");
+        }
+        
+        // Проверка наличия перевода названия коллекции
+        $translatedName = translate_text($movie['title'], $language);
+        if (empty($translatedName)) {
+            throw new Exception("Failed to translate collection name.");
+        }
+        
+        // Вставка новой коллекции в базу данных
         $query = "INSERT INTO collections (user_id, movie_id, language, name) VALUES (:user_id, :movie_id, :language, :name)";
         $stmt = $db->prepare($query);
-        $stmt->bindParam(':user_id', $user_id);
-        $stmt->bindParam(':movie_id', $movie_id);
-        $stmt->bindParam(':language', $language);
-        $stmt->bindParam(':name', $translated_title);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':movie_id', $movie_id, PDO::PARAM_INT);
+        $stmt->bindParam(':language', $language, PDO::PARAM_STR);
+        $stmt->bindParam(':name', $translatedName, PDO::PARAM_STR);
         $stmt->execute();
-
-        return ['success' => true, 'message' => 'Collection created successfully'];
-    } catch (PDOException $e) {
-        return ['success' => false, 'message' => 'Failed to create collection: ' . $e->getMessage()];
+        
+        return true;
+    } catch (Exception $e) {
+        return $e->getMessage();
     }
 }
+
 
 
 
