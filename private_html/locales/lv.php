@@ -22,6 +22,7 @@ return [
     'Description' => 'Apraksts',
     'Create' => 'Izveidot',
     'Movie Count' => 'Filmu skaits',
+    'View Collection' => 'Skatīt kolekciju',
 ];
 
 ?>
