@@ -22,6 +22,7 @@ return [
     'Description' => 'Description',
     'Create' => 'Create',
     'Movie Count' => 'Movie Count',
+    'View Collection' => 'View Collection',
 ];
 
 ?>
