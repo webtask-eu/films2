@@ -354,9 +354,12 @@ function get_collection($collectionId)
 
 // Функция для добавления фильма в коллекцию
 function add_movie_to_collection($collection_id, $movie_id) {
-    global $db;
-
     try {
+        global $db;
+
+        echo "Collection ID: " . $collection_id . "<br>";
+        echo "Movie ID: " . $movie_id . "<br>";
+
         $query = "INSERT INTO collections_movies (collection_id, movie_id) VALUES (:collection_id, :movie_id)";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':collection_id', $collection_id);
@@ -365,8 +368,7 @@ function add_movie_to_collection($collection_id, $movie_id) {
 
         return true;
     } catch (PDOException $e) {
-        // Обработка ошибок при выполнении запроса
-        error_log('Failed to add movie to collection: ' . $e->getMessage());
-        return false;
+        echo "Error Message: " . $e->getMessage() . "<br>";
+        throw new Exception('Failed to add movie to collection. Please try again.');
     }
 }
