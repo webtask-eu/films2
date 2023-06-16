@@ -237,32 +237,6 @@ function get_user_collections($user_id)
     }
 }
 
-/**
- * Создает новую коллекцию в базе данных.
- *
- * @param int $user_id Идентификатор пользователя
- * @param string $name Название коллекции
- * @param string $description Описание коллекции
- * @return bool Возвращает true в случае успешного создания коллекции, иначе false
- * @throws PDOException Если произошла ошибка при выполнении запроса
- */
-function create_collection($user_id, $name, $description)
-{
-    global $db;
-
-    try {
-        $query = $db->prepare("INSERT INTO collections (user_id, name, description) VALUES (:user_id, :name, :description)");
-        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $query->bindParam(':name', $name, PDO::PARAM_STR);
-        $query->bindParam(':description', $description, PDO::PARAM_STR);
-
-        return $query->execute();
-    } catch (PDOException $e) {
-        // Обработка ошибки при выполнении запроса
-        throw new PDOException('Error creating collection: ' . $e->getMessage());
-    }
-}
-
 use GuzzleHttp\Client;
 
 // Функция для автоматического перевода текста с помощью Deepl Translate API
