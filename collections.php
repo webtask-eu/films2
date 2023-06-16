@@ -22,7 +22,7 @@ $collections = get_user_collections($user_id);
 </head>
 <body>
     <header>
-        <?php include_once __DIR__ . '/private_html/includes/menu.php'; ?>
+        <?php include_once __DIR__ . '/menu.php'; ?>
     </header>
     <main>
         <h1><?php echo translate('My Collections'); ?></h1>
