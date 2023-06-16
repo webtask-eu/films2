@@ -262,3 +262,85 @@ function create_collection($user_id, $name, $description)
         throw new PDOException('Error creating collection: ' . $e->getMessage());
     }
 }
+
+use GuzzleHttp\Client;
+
+// Функция для автоматического перевода текста с помощью Deepl Translate API
+function translate_text($text, $targetLanguage) {
+    $apiKey = 'YOUR_DEEPL_API_KEY';
+    
+    $client = new Client();
+    
+    try {
+        $response = $client->request('POST', 'https://api-free.deepl.com/v2/translate', [
+            'form_params' => [
+                'auth_key' => $apiKey,
+                'text' => $text,
+                'target_lang' => $targetLanguage,
+            ],
+        ]);
+        
+        $data = json_decode($response->getBody(), true);
+        
+        if (isset($data['translations'][0]['text'])) {
+            return $data['translations'][0]['text'];
+        } else {
+            return $text;
+        }
+    } catch (Exception $e) {
+        // Обработка ошибки перевода
+        error_log("Error translating text: " . $e->getMessage());
+        return $text;
+    }
+}
+
+// Функция для создания коллекции пользователя
+function create_collection($user_id, $name) {
+    global $db;
+
+    // Автоматический перевод названия коллекции на другие языки
+    $translatedNames = [];
+
+    // Проверяем текущий язык пользователя
+    $currentLanguage = get_current_language();
+
+    // Добавляем оригинальное название коллекции в список переводов
+    $translatedNames[$currentLanguage] = $name;
+
+    // Переводим название коллекции на другие языки
+    $otherLanguages = get_other_languages($currentLanguage);
+    foreach ($otherLanguages as $language) {
+        $translatedName = translate_text($name, $language);
+        $translatedNames[$language] = $translatedName;
+    }
+
+    // Вставка новой коллекции в базу данных
+    try {
+        // Запрос для вставки коллекции
+        $query = "INSERT INTO collections (user_id) VALUES (:user_id)";
+        $stmt = $db->prepare($query);
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->execute();
+
+        // Получаем ID вставленной коллекции
+        $collection_id = $db->lastInsertId();
+
+        // Запрос для вставки переводов названий коллекции
+        $query = "INSERT INTO collection_translations (collection_id, language, name) VALUES (:collection_id, :language, :name)";
+        $stmt = $db->prepare($query);
+
+        // Вставляем переводы названий коллекции
+        foreach ($translatedNames as $language => $translatedName) {
+            $stmt->bindValue(':collection_id', $collection_id);
+            $stmt->bindValue(':language', $language);
+            $stmt->bindValue(':name', $translatedName);
+            $stmt->execute();
+        }
+
+        return true;
+    } catch (PDOException $e) {
+        // Обработка ошибки вставки коллекции
+        error_log("Error creating collection: " . $e->getMessage());
+        return false;
+    }
+}
