@@ -1,6 +1,6 @@
 <?php
 require_once 'db_connect.php'; // Подключаем файл с подключением к базе данных
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/var/www/vhosts/eveem.in/vendor/autoload.php';
 
 // Функция для перевода текста
 function translate($text) {
