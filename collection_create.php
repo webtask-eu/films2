@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $collectionId = create_collection($name, $description, $translatedName);
 
         // Перенаправление на страницу с информацией о коллекции
-        redirect('/collection.php?id=' . $collectionId);
+        redirect('/collections.php?id=' . $collectionId);
     } catch (Exception $e) {
         // Обработка ошибки 500
         // Вывод сообщения об ошибке или другие действия
