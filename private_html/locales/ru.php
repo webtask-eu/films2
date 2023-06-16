@@ -22,6 +22,7 @@ return [
     'Description' => 'Описание',
     'Create' => 'Создать',
     'Movie Count' => 'Количество фильмов',
+    'View Collection' => 'Просмотр коллекции',
 ];
 
 ?>
