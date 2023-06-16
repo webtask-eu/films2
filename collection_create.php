@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Автоматический перевод названия коллекции на другие языки
-        $translatedName = translate_text($name, $_SESSION['language']);
+        $translatedName = translate_text($name, get_current_language());
 
         // Создание коллекции
         $collectionId = create_collection($name, $description, $translatedName);
@@ -54,8 +54,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="description"><?php echo translate('Description'); ?>:</label>
                 <textarea id="description" name="description"><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
             </div>
-            <button type="submit"><?php echo translate('Create'); ?></button>
-        </form>
-    </main>
-</body>
-</html>
+            <button type="
