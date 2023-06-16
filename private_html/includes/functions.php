@@ -354,11 +354,14 @@ function get_collection($collectionId)
 
 // Функция для добавления фильма в коллекцию
 function add_movie_to_collection($collection_id, $movie_id) {
-    global $pdo;
+    global $db;
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO collections_movies (collection_id, movie_id) VALUES (?, ?)");
-        $stmt->execute([$collection_id, $movie_id]);
+        $query = "INSERT INTO collections_movies (collection_id, movie_id) VALUES (:collection_id, :movie_id)";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':collection_id', $collection_id);
+        $stmt->bindParam(':movie_id', $movie_id);
+        $stmt->execute();
 
         return true;
     } catch (PDOException $e) {
