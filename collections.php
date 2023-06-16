@@ -1,15 +1,19 @@
 <?php
 require_once __DIR__ . '/config.php';
 
-// Проверка авторизации пользователя
-if (!is_logged_in()) {
-    // Если пользователь не авторизован, перенаправляем на страницу входа
-    redirect('/login.php');
+// Получение ID коллекции из параметров запроса
+$collection_id = $_GET['id'];
+
+// Получение информации о коллекции
+$collection = get_collection($collection_id);
+
+// Проверка, если коллекция не найдена, перенаправляем на страницу ошибки
+if (!$collection) {
+    redirect('/error.php');
 }
 
-// Получение всех коллекций пользователя
-$user_id = $_SESSION['user_id'];
-$collections = get_user_collections($user_id);
+// Debug Info
+// var_dump($collection);
 
 ?>
 
@@ -32,10 +36,6 @@ $collections = get_user_collections($user_id);
             <?php } ?>
             <p><?php echo $collection['description']; ?></p>
             <a href="/collection.php?id=<?php echo $collection['id']; ?>"><?php echo translate('View Collection'); ?></a>
-        </div>
-    </main>
-</body>
-</html>     <?php } ?>
         </div>
     </main>
 </body>
