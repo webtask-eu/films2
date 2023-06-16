@@ -7,48 +7,28 @@ if (!is_logged_in()) {
     redirect('/login.php');
 }
 
-// Проверяем, передан ли идентификатор коллекции в URL-параметрах
-if (!isset($_GET['collection_id']) || empty($_GET['collection_id'])) {
-    // Если идентификатор коллекции отсутствует, выводим сообщение об ошибке
-    $error_message = 'Collection ID is missing or invalid.';
-} else {
+// Проверка, что передан параметр collection_id в URL
+if (isset($_GET['collection_id'])) {
     $collection_id = $_GET['collection_id'];
 
-    // Получение информации о коллекции
-    $collection = get_collection($collection_id);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Получение данных из формы
+        $movie_id = $_POST['movie_id'];
 
-    // Проверка, если коллекция не найдена, выводим сообщение об ошибке
-    if (!$collection) {
-        $error_message = 'Collection not found.';
-    }
-}
-
-// Переменные для хранения данных формы
-$title = $description = '';
-$error_message = '';
-
-// Обработка отправки формы
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Получение данных из формы
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-
-    // Валидация данных
-    if (empty($title)) {
-        $error_message = 'Please enter a title for the movie.';
-    } else {
-        // Добавление фильма в коллекцию
-        $movie_id = add_movie_to_collection($collection_id, $title, $description);
-
-        if ($movie_id) {
-            // Фильм успешно добавлен
-            // Перенаправление на страницу просмотра коллекции с передачей ID коллекции
-            header('Location: /view_collection.php?collection_id=' . $collection_id);
-            exit;
+        if (!empty($movie_id)) {
+            // Вызов функции add_movie_to_collection()
+            try {
+                add_movie_to_collection($collection_id, $movie_id);
+                echo "Movie successfully added to collection.";
+            } catch (Exception $e) {
+                echo "Failed to add movie to collection: " . $e->getMessage();
+            }
         } else {
-            $error_message = 'Failed to add movie to collection. Please try again.';
+            echo "Error: Invalid movie ID.";
         }
     }
+} else {
+    echo "Error: Invalid collection ID.";
 }
 ?>
 
@@ -56,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><?php echo translate('Add Movie'); ?></title>
+    <title>Add Movie to Collection</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/add_movie.css">
 </head>
@@ -65,20 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include_once __DIR__ . '/menu.php'; ?>
     </header>
     <main>
-        <h1><?php echo translate('Add Movie'); ?></h1>
-        <?php if ($error_message) { ?>
-            <p class="error"><?php echo $error_message; ?></p>
-        <?php } ?>
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+        <h1>Add Movie to Collection</h1>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . '?collection_id=' . $collection_id); ?>">
             <div class="form-group">
-                <label for="title"><?php echo translate('Title'); ?>:</label>
-                <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>">
+                <label for="movie_id">Movie ID:</label>
+                <input type="text" id="movie_id" name="movie_id" required>
             </div>
-            <div class="form-group">
-                <label for="description"><?php echo translate('Description'); ?>:</label>
-                <textarea id="description" name="description"><?php echo htmlspecialchars($description); ?></textarea>
-            </div>
-            <button type="submit"><?php echo translate('Add'); ?></button>
+            <button type="submit">Add Movie</button>
         </form>
     </main>
 </body>
