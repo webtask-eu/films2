@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/config.php';
 
+$error_message = '';
+
 // Проверка авторизации пользователя
 if (!is_logged_in()) {
     redirect('/login.php');
