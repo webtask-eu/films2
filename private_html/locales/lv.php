@@ -21,6 +21,7 @@ return [
     'Logout' => 'Izrakstīties',
     'Description' => 'Apraksts',
     'Create' => 'Izveidot',
+    'Movie Count' => 'Filmu skaits',
 ];
 
 ?>
