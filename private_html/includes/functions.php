@@ -353,3 +353,26 @@ function get_other_languages()
 
     return $otherLanguages;
 }
+
+function get_collection($collectionId)
+{
+    global $db;
+
+    try {
+        // Подготовка SQL-запроса
+        $query = "SELECT * FROM collections WHERE id = :collection_id";
+
+        // Подготовка и выполнение запроса с использованием подготовленного выражения
+        $statement = $db->prepare($query);
+        $statement->bindParam(':collection_id', $collectionId, PDO::PARAM_INT);
+        $statement->execute();
+
+        // Получение результатов запроса
+        $collection = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $collection;
+    } catch (PDOException $e) {
+        // Обработка ошибки запроса
+        die('Error executing query: ' . $e->getMessage());
+    }
+}
