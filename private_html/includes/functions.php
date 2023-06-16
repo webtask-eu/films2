@@ -270,37 +270,23 @@ function translate_text($text, $targetLanguage) {
 }
 
 
-function create_collection($user_id, $movie_id, $language) {
+function create_collection($name, $description, $language) {
     try {
         global $db;
-        
-        // Проверка существования пользователя
-        $user = get_user($user_id);
-        if (!$user) {
-            throw new Exception("User does not exist.");
-        }
-        
-        
-        // Проверка наличия перевода названия коллекции
-        $translatedName = translate_text($movie['title'], $language);
-        if (empty($translatedName)) {
-            throw new Exception("Failed to translate collection name.");
-        }
-        
-        // Вставка новой коллекции в базу данных
-        $query = "INSERT INTO collections (user_id, movie_id, language, name) VALUES (:user_id, :movie_id, :language, :name)";
+
+        $query = "INSERT INTO collections (name, description, language) VALUES (:name, :description, :language)";
         $stmt = $db->prepare($query);
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $stmt->bindParam(':movie_id', $movie_id, PDO::PARAM_INT);
-        $stmt->bindParam(':language', $language, PDO::PARAM_STR);
-        $stmt->bindParam(':name', $translatedName, PDO::PARAM_STR);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':language', $language);
         $stmt->execute();
-        
-        return true;
-    } catch (Exception $e) {
-        return $e->getMessage();
+
+        return $db->lastInsertId();
+    } catch (PDOException $e) {
+        throw new Exception('Failed to create collection: ' . $e->getMessage());
     }
 }
+
 
 
 
