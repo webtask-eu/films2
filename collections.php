@@ -7,9 +7,10 @@ $collection_id = $_GET['id'];
 // Получение информации о коллекции
 $collection = get_collection($collection_id);
 
-// Проверка, если коллекция не найдена, перенаправляем на страницу ошибки
+// Проверка, если коллекция не найдена, выводим ошибку
 if (!$collection) {
-    redirect('/error.php');
+    echo 'Collection not found.';
+    exit;
 }
 
 // Debug Info
