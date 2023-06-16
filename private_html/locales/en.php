@@ -21,6 +21,7 @@ return [
     'Logout' => 'Logout',
     'Description' => 'Description',
     'Create' => 'Create',
+    'Movie Count' => 'Movie Count',
 ];
 
 ?>
