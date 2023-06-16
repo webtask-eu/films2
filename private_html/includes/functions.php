@@ -370,6 +370,11 @@ function get_collection($collectionId)
         // Получение результатов запроса
         $collection = $statement->fetch(PDO::FETCH_ASSOC);
 
+        // Отладочная информация
+        echo "SQL Query: " . $query . "<br>";
+        echo "Collection ID: " . $collectionId . "<br>";
+        echo "Fetched Collection: " . print_r($collection, true) . "<br>";
+
         return $collection;
     } catch (PDOException $e) {
         // Обработка ошибки запроса
