@@ -372,3 +372,22 @@ function add_movie_to_collection($collection_id, $movie_id) {
         throw new Exception('Failed to add movie to collection. Please try again.');
     }
 }
+
+// Создание фильма
+function create_movie($title, $description, $release_year, $language) {
+    try {
+        global $db;
+
+        $query = "INSERT INTO movies (title, description, release_year, language) VALUES (:title, :description, :release_year, :language)";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':release_year', $release_year);
+        $stmt->bindParam(':language', $language);
+        $stmt->execute();
+
+        return $db->lastInsertId();
+    } catch (PDOException $e) {
+        throw new Exception('Failed to create movie: ' . $e->getMessage());
+    }
+}
