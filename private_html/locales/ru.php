@@ -21,7 +21,7 @@ return [
     'Logout' => 'Выход',
     'Description' => 'Описание',
     'Create' => 'Создать',
-    $lang['Movie Count'] = 'Количество фильмов';
+    'Movie Count' => 'Количество фильмов',
 ];
 
 ?>
