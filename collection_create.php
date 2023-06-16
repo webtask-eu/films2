@@ -3,38 +3,29 @@ require_once __DIR__ . '/config.php';
 
 // Проверка авторизации пользователя
 if (!is_logged_in()) {
-    // Если пользователь не авторизован, перенаправляем на страницу входа
     redirect('/login.php');
 }
 
-// Переменные для хранения данных формы
-$name = $description = '';
-$error_message = '';
-
 // Обработка отправки формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Получение данных из формы
     $name = $_POST['name'];
     $description = $_POST['description'];
-
-    // Валидация данных
-    if (empty($name)) {
-        $error_message = 'Please enter a name for the collection.';
-    } else {
-        // Создание новой коллекции
-        $result = create_collection($name, $description);
-        if ($result['success']) {
-            // Перенаправление на страницу коллекции
-            redirect('/collection.php?id=' . $result['collection_id']);
-        } else {
-            $error_message = $result['message'];
-        }
+    
+    // Перевод названия коллекции на другие языки
+    $translations = [];
+    $translations['en'] = $name; // Исходное название на английском
+    $translations['lv'] = translate_text($name, 'en', 'lv');
+    $translations['ru'] = translate_text($name, 'en', 'ru');
+    
+    // Создание коллекции
+    try {
+        $collection_id = create_collection($name, $translations, $description);
+        // Перенаправление на страницу с информацией о коллекции
+        redirect("/collection.php?id={$collection_id}");
+    } catch (Exception $e) {
+        $error_message = $e->getMessage();
     }
 }
-
-// Получение коллекций текущего пользователя
-$user_id = $_SESSION['user_id'];
-$collections = get_user_collections($user_id);
 ?>
 
 <!DOCTYPE html>
@@ -43,18 +34,15 @@ $collections = get_user_collections($user_id);
     <meta charset="UTF-8">
     <title><?php echo translate('Create Collection'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/registration.css">
-    <link rel="stylesheet" href="/css/submenu.css">
-    <link rel="stylesheet" href="/css/collections.css">
+    <link rel="stylesheet" href="/css/collection_create.css">
 </head>
 <body>
     <header>
-        <?php include_once __DIR__ . '/menu.php'; ?>
+        <?php include_once __DIR__ . '/private_html/includes/menu.php'; ?>
     </header>
-    <?php include_once __DIR__ . '/submenu.php'; ?>
-    <div class="container">
+    <main>
         <h1><?php echo translate('Create Collection'); ?></h1>
-        <?php if ($error_message) { ?>
+        <?php if (isset($error_message)) { ?>
             <p class="error"><?php echo $error_message; ?></p>
         <?php } ?>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
@@ -68,6 +56,5 @@ $collections = get_user_collections($user_id);
             </div>
             <button type="submit"><?php echo translate('Create'); ?></button>
         </form>
-    </div>
+    </main>
 </body>
-</html>
