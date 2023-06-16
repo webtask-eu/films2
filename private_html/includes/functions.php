@@ -351,19 +351,6 @@ function get_collection($collectionId)
     }
 }
 
-// Функция для получения информации о коллекции по ее идентификатору
-function get_collection($collection_id) {
-    try {
-        $stmt = $pdo->prepare("SELECT * FROM collections WHERE id = :collection_id");
-        $stmt->bindParam(':collection_id', $collection_id);
-        $stmt->execute();
-
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        // Обработка ошибок при выполнении запроса
-        throw new Exception('Failed to get collection: ' . $e->getMessage());
-    }
-}
 
 // Функция для добавления фильма в коллекцию
 function add_movie_to_collection($collection_id, $title, $description) {
