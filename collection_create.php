@@ -8,22 +8,25 @@ if (!is_logged_in()) {
 
 // Обработка отправки формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Получение данных из формы
     $name = $_POST['name'];
     $description = $_POST['description'];
-    
-    // Перевод названия коллекции на другие языки
-    $translations = [];
-    $translations['en'] = $name; // Исходное название на английском
-    $translations['lv'] = translate_text($name, 'en', 'lv');
-    $translations['ru'] = translate_text($name, 'en', 'ru');
-    
-    // Создание коллекции
+
     try {
-        $collection_id = create_collection($name, $translations, $description);
+        // Автоматический перевод названия коллекции на другие языки
+        $translatedName = translate_text($name);
+
+        // Создание коллекции
+        $collectionId = create_collection($name, $description, $translatedName);
+
         // Перенаправление на страницу с информацией о коллекции
-        redirect("/collection.php?id={$collection_id}");
+        redirect('/collection.php?id=' . $collectionId);
     } catch (Exception $e) {
-        $error_message = $e->getMessage();
+        // Обработка ошибки 500
+        // Вывод сообщения об ошибке или другие действия
+
+        // Пример вывода сообщения об ошибке
+        echo 'Ошибка: ' . $e->getMessage();
     }
 }
 ?>
