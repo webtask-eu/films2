@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <header>
-    <?php include_once __DIR__ . '/private_html/includes/menu.php'; ?>
+    <?php include_once __DIR__ . '/menu.php'; ?>
 </header>
 <main>
     <h1>Create Collection</h1>
