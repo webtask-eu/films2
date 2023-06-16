@@ -269,56 +269,45 @@ function translate_text($text, $targetLanguage) {
     }
 }
 
-// Функция для создания коллекции пользователя
-function create_collection($user_id, $name) {
+
+function create_collection($user_id, $name, $description) {
     global $db;
 
-    // Автоматический перевод названия коллекции на другие языки
-    $translatedNames = [];
-
-    // Проверяем текущий язык пользователя
-    $currentLanguage = get_current_language();
-
-    // Добавляем оригинальное название коллекции в список переводов
-    $translatedNames[$currentLanguage] = $name;
-
-    // Переводим название коллекции на другие языки
-    $otherLanguages = get_other_languages($currentLanguage);
-    foreach ($otherLanguages as $language) {
-        $translatedName = translate_text($name, $language);
-        $translatedNames[$language] = $translatedName;
-    }
-
-    // Вставка новой коллекции в базу данных
     try {
-        // Запрос для вставки коллекции
-        $query = "INSERT INTO collections (user_id) VALUES (:user_id)";
-        $stmt = $db->prepare($query);
-        $stmt->bindValue(':user_id', $user_id);
-        $stmt->execute();
+        // Подготовка и выполнение запроса на создание коллекции
+        $stmt = $db->prepare('INSERT INTO collections (user_id, name, description) VALUES (?, ?, ?)');
+        $stmt->execute([$user_id, $name, $description]);
 
-        // Получаем ID вставленной коллекции
+        // Получение ID только что созданной коллекции
         $collection_id = $db->lastInsertId();
 
-        // Запрос для вставки переводов названий коллекции
-        $query = "INSERT INTO collection_translations (collection_id, language, name) VALUES (:collection_id, :language, :name)";
-        $stmt = $db->prepare($query);
+        // Автоматический перевод названия коллекции на другие языки
+        $other_languages = get_other_languages();
+        $current_language = get_current_language();
 
-        // Вставляем переводы названий коллекции
-        foreach ($translatedNames as $language => $translatedName) {
-            $stmt->bindValue(':collection_id', $collection_id);
-            $stmt->bindValue(':language', $language);
-            $stmt->bindValue(':name', $translatedName);
-            $stmt->execute();
+        foreach ($other_languages as $language) {
+            if ($language !== $current_language) {
+                $translated_name = translate_text($name, $current_language, $language);
+                // Сохранение перевода названия коллекции в базу данных
+                $stmt = $db->prepare('INSERT INTO collection_translations (collection_id, language, name) VALUES (?, ?, ?)');
+                $stmt->execute([$collection_id, $language, $translated_name]);
+            }
         }
 
-        return true;
+        // Возвращение массива с результатом операции
+        return [
+            'success' => true,
+            'collection_id' => $collection_id
+        ];
     } catch (PDOException $e) {
-        // Обработка ошибки вставки коллекции
-        error_log("Error creating collection: " . $e->getMessage());
-        return false;
+        // Возвращение массива с сообщением об ошибке
+        return [
+            'success' => false,
+            'message' => 'Failed to create collection: ' . $e->getMessage()
+        ];
     }
 }
+
 
 /**
  * Получить текущий язык пользователя.
