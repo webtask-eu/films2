@@ -391,3 +391,16 @@ function create_movie($title, $description, $release_year, $language) {
         throw new Exception('Failed to create movie: ' . $e->getMessage());
     }
 }
+
+// Получение списка фильмов
+function get_movies() {
+    try {
+        global $db;
+
+        $query = "SELECT id, title, description, release_year, language FROM movies";
+        $stmt = $db->query($query);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        throw new Exception('Failed to get movies: ' . $e->getMessage());
+    }
+}
