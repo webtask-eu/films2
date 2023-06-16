@@ -319,3 +319,19 @@ function create_collection($user_id, $name) {
         return false;
     }
 }
+
+/**
+ * Получить текущий язык пользователя.
+ *
+ * @return string Текущий язык пользователя.
+ */
+function get_current_language()
+{
+    // Проверяем, есть ли информация о языке в сессии
+    if (isset($_SESSION['language'])) {
+        return $_SESSION['language'];
+    }
+
+    // Если информации о языке в сессии нет, возвращаем язык по умолчанию
+    return 'en'; // Здесь вы можете установить ваш язык по умолчанию
+}
