@@ -270,43 +270,46 @@ function translate_text($text, $targetLanguage) {
 }
 
 
-function create_collection($user_id, $name, $description) {
-    global $db;
-
+function create_collection($user_id, $movie_id, $language) {
     try {
-        // Подготовка и выполнение запроса на создание коллекции
-        $stmt = $db->prepare('INSERT INTO collections (user_id, name, description) VALUES (?, ?, ?)');
-        $stmt->execute([$user_id, $name, $description]);
+        global $db;
 
-        // Получение ID только что созданной коллекции
-        $collection_id = $db->lastInsertId();
+        // Получение названия фильма
+        $query = "SELECT title FROM movies WHERE id = :movie_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':movie_id', $movie_id);
+        $stmt->execute();
+        $movie = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Автоматический перевод названия коллекции на другие языки
-        $other_languages = get_other_languages();
-        $current_language = get_current_language();
+        // Перевод названия коллекции
+        $translated_title = translate_text($movie['title'], $language);
 
-        foreach ($other_languages as $language) {
-            if ($language !== $current_language) {
-                $translated_name = translate_text($name, $current_language, $language);
-                // Сохранение перевода названия коллекции в базу данных
-                $stmt = $db->prepare('INSERT INTO collection_translations (collection_id, language, name) VALUES (?, ?, ?)');
-                $stmt->execute([$collection_id, $language, $translated_name]);
-            }
+        // Проверка, существует ли уже коллекция с таким пользователем и фильмом
+        $query = "SELECT * FROM collections WHERE user_id = :user_id AND movie_id = :movie_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':movie_id', $movie_id);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return ['success' => false, 'message' => 'Collection already exists for this user and movie'];
         }
 
-        // Возвращение массива с результатом операции
-        return [
-            'success' => true,
-            'collection_id' => $collection_id
-        ];
+        // Вставка новой коллекции
+        $query = "INSERT INTO collections (user_id, movie_id, language, name) VALUES (:user_id, :movie_id, :language, :name)";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':movie_id', $movie_id);
+        $stmt->bindParam(':language', $language);
+        $stmt->bindParam(':name', $translated_title);
+        $stmt->execute();
+
+        return ['success' => true, 'message' => 'Collection created successfully'];
     } catch (PDOException $e) {
-        // Возвращение массива с сообщением об ошибке
-        return [
-            'success' => false,
-            'message' => 'Failed to create collection: ' . $e->getMessage()
-        ];
+        return ['success' => false, 'message' => 'Failed to create collection: ' . $e->getMessage()];
     }
 }
+
 
 
 /**
