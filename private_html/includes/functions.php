@@ -335,3 +335,21 @@ function get_current_language()
     // Если информации о языке в сессии нет, возвращаем язык по умолчанию
     return 'en'; // Здесь вы можете установить ваш язык по умолчанию
 }
+
+/**
+ * Получить список других языков, исключая текущий язык.
+ *
+ * @return array Список других языков.
+ */
+function get_other_languages()
+{
+    // Предполагаем, что вы храните доступные языки в массиве
+    $availableLanguages = ['en', 'ru', 'lv'];
+
+    $currentLanguage = get_current_language();
+
+    // Удалите текущий язык из массива доступных языков
+    $otherLanguages = array_diff($availableLanguages, [$currentLanguage]);
+
+    return $otherLanguages;
+}
