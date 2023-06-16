@@ -280,11 +280,6 @@ function create_collection($user_id, $movie_id, $language) {
             throw new Exception("User does not exist.");
         }
         
-        // Проверка существования фильма
-        $movie = get_movie($movie_id);
-        if (!$movie) {
-            throw new Exception("Movie does not exist.");
-        }
         
         // Проверка наличия перевода названия коллекции
         $translatedName = translate_text($movie['title'], $language);
