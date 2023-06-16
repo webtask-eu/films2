@@ -350,3 +350,40 @@ function get_collection($collectionId)
         die('Error executing query: ' . $e->getMessage());
     }
 }
+
+// Функция для получения информации о коллекции по ее идентификатору
+function get_collection($collection_id) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM collections WHERE id = :collection_id");
+        $stmt->bindParam(':collection_id', $collection_id);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        // Обработка ошибок при выполнении запроса
+        throw new Exception('Failed to get collection: ' . $e->getMessage());
+    }
+}
+
+// Функция для добавления фильма в коллекцию
+function add_movie_to_collection($collection_id, $title, $description) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO movies (title, description) VALUES (:title, :description)");
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':description', $description);
+        $stmt->execute();
+
+        $movie_id = $pdo->lastInsertId();
+
+        $stmt = $pdo->prepare("INSERT INTO collections (collection_id, movie_id) VALUES (:collection_id, :movie_id)");
+        $stmt->bindParam(':collection_id', $collection_id);
+        $stmt->bindParam(':movie_id', $movie_id);
+        $stmt->execute();
+
+        return $movie_id;
+    } catch (PDOException $e) {
+        // Обработка ошибок при выполнении запроса
+        throw new Exception('Failed to add movie to collection: ' . $e->getMessage());
+    }
+}
+
