@@ -241,7 +241,7 @@ use GuzzleHttp\Client;
 
 // Функция для автоматического перевода текста с помощью Deepl Translate API
 function translate_text($text, $targetLanguage) {
-    $apiKey = 'YOUR_DEEPL_API_KEY';
+    $apiKey = '98289735-7f85-93b8-3d57-5b13159a3689';
     
     $client = new Client();
     
