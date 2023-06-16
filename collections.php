@@ -3,10 +3,11 @@ require_once __DIR__ . '/config.php';
 
 // Проверка авторизации пользователя
 if (!is_logged_in()) {
+    // Если пользователь не авторизован, перенаправляем на страницу входа
     redirect('/login.php');
 }
 
-// Получение списка коллекций пользователя
+// Получение коллекций пользователя
 $user_id = $_SESSION['user_id'];
 $collections = get_user_collections($user_id);
 
@@ -26,19 +27,22 @@ $collections = get_user_collections($user_id);
     </header>
     <main>
         <h1><?php echo translate('My Collections'); ?></h1>
-        <div class="collection-list">
-            <?php if (empty($collections)) { ?>
-                <p><?php echo translate('No collections found.'); ?></p>
-            <?php } else { ?>
+        <?php if (count($collections) > 0) { ?>
+            <ul class="collection-list">
                 <?php foreach ($collections as $collection) { ?>
-                    <div class="collection-item">
-                        <h2><?php echo htmlspecialchars($collection['name']); ?></h2>
-                        <p><?php echo translate('Movie Count'); ?>: <?php echo $collection['movie_count']; ?></p>
-                        <a href="/collection.php?id=<?php echo $collection['id']; ?>"><?php echo translate('View Collection'); ?></a>
-                    </div>
+                    <li>
+                        <a href="/collection.php?id=<?php echo $collection['id']; ?>">
+                            <div class="collection-details">
+                                <h2><?php echo $collection['name']; ?></h2>
+                                <p><?php echo translate('Movie Count'); ?>: <?php echo isset($collection['movie_count']) ? $collection['movie_count'] : 0; ?></p>
+                            </div>
+                        </a>
+                    </li>
                 <?php } ?>
-            <?php } ?>
-        </div>
+            </ul>
+        <?php } else { ?>
+            <p><?php echo translate('No collections found.'); ?></p>
+        <?php } ?>
     </main>
 </body>
 </html>
