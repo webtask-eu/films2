@@ -16,6 +16,13 @@ $error_message = '';
 // Получение списка коллекций пользователя
 try {
     $collections = get_user_collections();
+    var_dump($collections); // Отладочная информация
+
+    // Если у пользователя нет доступных коллекций, предложить создать коллекцию
+    if (empty($collections)) {
+        echo 'You don\'t have any collections. <a href="/collection_create.php">Create a collection</a>';
+        exit;
+    }
 } catch (Exception $e) {
     $error_message = 'Failed to get user collections: ' . $e->getMessage();
 }
@@ -39,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
