@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Добавление фильма в коллекцию
         try {
-            add_movie_to_collection($collection_id, $title, $description);
+            add_movie_to_collection($_POST['collection_id'], $title, $description); // Исправлено: использовать $_POST['collection_id'] вместо $collection_id
             redirect('/collections.php');
         } catch (Exception $e) {
             $error_message = 'Failed to add movie to collection: ' . $e->getMessage();
@@ -75,6 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php } ?>
                 </select>
             </div>
+            <!-- Добавлено скрытое поле с значением $collection_id -->
+            <input type="hidden" name="collection_id" value="<?php echo $collection_id; ?>">
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>">
@@ -89,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 </html>
 
- <!-- Debug Info -->
- <pre>
-        <?php // var_dump($collections); ?>
-    </pre>
+<!-- Debug Info -->
+<pre>
+    <?php // var_dump($collections); ?>
+</pre>
