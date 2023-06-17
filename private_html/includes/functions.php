@@ -395,3 +395,11 @@ function get_user_collections() {
         throw new Exception('Failed to get user collections: ' . $e->getMessage());
     }
 }
+
+function get_current_user_id()
+{
+    if (is_logged_in()) {
+        return $_SESSION['user_id'];
+    }
+    return null;
+}
