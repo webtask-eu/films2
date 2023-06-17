@@ -386,6 +386,8 @@ function get_user_collections()
     try {
         $user_id = get_current_user_id();
 
+        echo '$user_id: ' . $user_id ;
+
         $query = "SELECT * FROM collections WHERE user_id = :user_id";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':user_id', $user_id);
