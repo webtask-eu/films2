@@ -14,7 +14,11 @@ $title = $description = '';
 $error_message = '';
 
 // Получение списка коллекций пользователя
-$collections = get_user_collections();
+try {
+    $collections = get_user_collections();
+} catch (Exception $e) {
+    $error_message = 'Failed to get user collections: ' . $e->getMessage();
+}
 
 // Обработка отправки формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
