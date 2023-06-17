@@ -80,3 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 </body>
 </html>
+
+ <!-- Debug Info -->
+ <pre>
+        <?php var_dump($collections); ?>
+    </pre>
