@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <!-- Добавлено скрытое поле с значением $collection_id -->
             <input type="hidden" name="collection_id" value="<?php echo $collection_id; ?>">
+            <?php echo $collection_id ?>
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>">
