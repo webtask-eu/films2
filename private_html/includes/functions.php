@@ -406,8 +406,34 @@ function get_user_collections()
 
 function get_current_user_id()
 {
-    if (is_logged_in()) {
-        return $_SESSION['user_id'];
+    if (!is_logged_in()) {
+        // Если пользователь не авторизован, выбрасываем исключение
+        throw new Exception('User not logged in.');
     }
-    return null;
+
+    try {
+        global $db;
+
+        // Получение ID текущего пользователя
+        $user_email = $_SESSION['email'];
+        $query = "SELECT id FROM users WHERE email = :email";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':email', $user_email);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$result) {
+            throw new Exception('User not found.');
+        }
+
+        return $result['id'];
+    } catch (PDOException $e) {
+        // Выводим отладочную информацию
+        echo 'Error Message: ' . $e->getMessage();
+        // Или записываем ошибку в лог файл
+        // error_log('Failed to get current user ID: ' . $e->getMessage());
+
+        // Пробрасываем исключение дальше
+        throw new Exception('Failed to get current user ID: ' . $e->getMessage());
+    }
 }
