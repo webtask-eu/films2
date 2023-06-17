@@ -91,5 +91,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
  <!-- Debug Info -->
  <pre>
-        <?php var_dump($collections); ?>
+        <?php // var_dump($collections); ?>
     </pre>
