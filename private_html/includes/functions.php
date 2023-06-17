@@ -215,28 +215,6 @@ function login_user_by_email($email, $password) {
     return ['success' => false, 'message' => 'Invalid email or password.'];
 }
 
-/**
- * Получает коллекции пользователя из базы данных.
- *
- * @param int $user_id Идентификатор пользователя
- * @return array Массив с информацией о коллекциях пользователя
- * @throws PDOException Если произошла ошибка при выполнении запроса
- */
-function get_user_collections($user_id)
-{
-    global $db;
-
-    try {
-        $query = $db->prepare("SELECT * FROM collections WHERE user_id = :user_id");
-        $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $query->execute();
-
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        // Обработка ошибки при выполнении запроса
-        throw new PDOException('Error retrieving user collections: ' . $e->getMessage());
-    }
-}
 
 use GuzzleHttp\Client;
 
