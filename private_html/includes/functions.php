@@ -377,7 +377,7 @@ function add_movie_to_collection($collection_id, $title, $description)
 
         $movie_id = $db->lastInsertId();
 
-        $query = "INSERT INTO collections (collection_id, movie_id) VALUES (:collection_id, :movie_id)";
+        $query = "INSERT INTO collections (id, movie_id) VALUES (:collection_id, :movie_id)";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':collection_id', $collection_id);
         $stmt->bindParam(':movie_id', $movie_id);
@@ -387,25 +387,6 @@ function add_movie_to_collection($collection_id, $title, $description)
     }
 }
 
-
-// Создание фильма
-function create_movie($title, $description, $release_year, $language) {
-    try {
-        global $db;
-
-        $query = "INSERT INTO movies (title, description, release_year, language) VALUES (:title, :description, :release_year, :language)";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':release_year', $release_year);
-        $stmt->bindParam(':language', $language);
-        $stmt->execute();
-
-        return $db->lastInsertId();
-    } catch (PDOException $e) {
-        throw new Exception('Failed to create movie: ' . $e->getMessage());
-    }
-}
 
 // Получение списка фильмов
 function get_movies() {
