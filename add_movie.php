@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="description">Description:</label>
                 <textarea id="description" name="description"><?php echo htmlspecialchars($description); ?></textarea>
             </div>
-            <button type="submit">Add Movie</button>
+            <button type="submit" name="add_movie">Add Movie</button>
         </form>
     </main>
 </body>
