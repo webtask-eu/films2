@@ -415,10 +415,10 @@ function get_current_user_id()
         global $db;
 
         // Получение ID текущего пользователя
-        $user_email = $_SESSION['email'];
-        $query = "SELECT id FROM users WHERE email = :email";
+        $user_id = $_SESSION['user_id'];
+        $query = "SELECT id FROM users WHERE id = :user_id";
         $stmt = $db->prepare($query);
-        $stmt->bindParam(':email', $user_email);
+        $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
