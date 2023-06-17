@@ -1,5 +1,6 @@
-<?php
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/private_html/includes/session_start.php';
+require_once __DIR__ . '/private_html/includes/functions.php';
 
 // Проверка авторизации пользователя
 if (!is_logged_in()) {
@@ -11,31 +12,34 @@ if (!is_logged_in()) {
 $name = $description = '';
 $error_message = '';
 
-try {
-    // Обработка отправки формы
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Получение данных из формы
-        $name = $_POST['name'];
-        $description = $_POST['description'];
+// Обработка отправки формы
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Получение данных из формы
+    $name = $_POST['name'];
+    $description = $_POST['description'];
 
-        // Валидация данных
-        if (empty($name)) {
-            throw new Exception('Please enter a name for the collection.');
-        } else {
+    // Валидация данных
+    if (empty($name)) {
+        $error_message = 'Please enter a name for the collection.';
+    } else {
+        // Получение ID текущего пользователя
+        $user_id = get_current_user_id();
+
+        try {
             // Создание коллекции
-            $collection_id = create_collection($name, $description);
+            $collection_id = create_collection($name, $description, $user_id);
 
             if ($collection_id) {
                 // Коллекция успешно добавлена
                 // Перенаправление на страницу добавления фильма в коллекцию с передачей ID коллекции
                 redirect('/add_movie.php?collection_id=' . $collection_id);
             } else {
-                throw new Exception('Failed to create collection. Please try again.');
+                $error_message = 'Failed to create collection. Please try again.';
             }
+        } catch (Exception $e) {
+            $error_message = 'Failed to create collection: ' . $e->getMessage();
         }
     }
-} catch (Exception $e) {
-    $error_message = $e->getMessage();
 }
 
 ?>
@@ -71,4 +75,3 @@ try {
     </main>
 </body>
 </html>
-
