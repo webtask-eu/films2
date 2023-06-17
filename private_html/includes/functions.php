@@ -342,6 +342,8 @@ function add_movie_to_collection($collection_id, $title, $description)
 {
     global $db;
 
+    echo  '$collection_id '.$collection_id;
+
     try {
         // Проверка, существует ли коллекция с заданным ID
         $query = "SELECT COUNT(*) FROM collections WHERE id = :collection_id";
