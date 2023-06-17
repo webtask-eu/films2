@@ -379,10 +379,11 @@ function get_movies() {
     }
 }
 
-function get_user_collections() {
-    try {
-        global $db;
+function get_user_collections()
+{
+    global $db;
 
+    try {
         $user_id = get_current_user_id();
 
         $query = "SELECT * FROM collections WHERE user_id = :user_id";
@@ -392,9 +393,16 @@ function get_user_collections() {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        throw new Exception('Failed to get user collections: ' . $e->getMessage());
+        // Выводим отладочную информацию
+        echo 'Error Message: ' . $e->getMessage();
+        // Или записываем ошибку в лог файл
+        // error_log('Failed to get user collections: ' . $e->getMessage());
+
+        // Возвращаем пустой массив в случае ошибки
+        return [];
     }
 }
+
 
 function get_current_user_id()
 {
