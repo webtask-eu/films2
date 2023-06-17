@@ -6,9 +6,15 @@ if (!is_logged_in()) {
     redirect('/login.php');
 }
 
+// Получение ID коллекции из параметра запроса
+$collection_id = $_GET['collection_id'] ?? '';
+
 // Переменные для хранения данных формы
 $title = $description = '';
 $error_message = '';
+
+// Получение списка коллекций пользователя
+$collections = get_user_collections();
 
 // Обработка отправки формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,11 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Добавление фильма в коллекцию
         try {
-            $collection_id = $_GET['collection_id'];
             add_movie_to_collection($collection_id, $title, $description);
-            
-            // Фильм успешно добавлен, перенаправление на страницу коллекции
-            redirect('/collection.php?id=' . $collection_id);
+            redirect('/collections.php');
         } catch (Exception $e) {
             $error_message = 'Failed to add movie to collection: ' . $e->getMessage();
         }
@@ -40,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Add Movie</title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/add_movie.css">
 </head>
 <body>
     <header>
@@ -51,7 +54,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($error_message) { ?>
             <p class="error"><?php echo $error_message; ?></p>
         <?php } ?>
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'] . '?collection_id=' . $_GET['collection_id']); ?>">
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+            <div class="form-group">
+                <label for="collection">Collection:</label>
+                <select id="collection" name="collection_id">
+                    <?php foreach ($collections as $collection) { ?>
+                        <option value="<?php echo $collection['id']; ?>" <?php echo ($collection_id === $collection['id']) ? 'selected' : ''; ?>><?php echo $collection['name']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>">
@@ -60,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="description">Description:</label>
                 <textarea id="description" name="description"><?php echo htmlspecialchars($description); ?></textarea>
             </div>
-            <button type="submit" name="add_movie">Add Movie</button>
+            <button type="submit">Add Movie</button>
         </form>
     </main>
 </body>
