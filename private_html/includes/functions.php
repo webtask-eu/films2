@@ -400,3 +400,20 @@ function get_movies() {
         throw new Exception('Failed to get movies: ' . $e->getMessage());
     }
 }
+
+function get_user_collections() {
+    try {
+        global $db;
+
+        $user_id = get_current_user_id();
+
+        $query = "SELECT * FROM collections WHERE user_id = :user_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        throw new Exception('Failed to get user collections: ' . $e->getMessage());
+    }
+}
