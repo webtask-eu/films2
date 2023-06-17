@@ -353,25 +353,40 @@ function get_collection($collectionId)
 
 
 // Функция для добавления фильма в коллекцию
-function add_movie_to_collection($collection_id, $movie_id) {
+function add_movie_to_collection($collection_id, $title, $description)
+{
+    global $db;
+
     try {
-        global $db;
+        // Проверка, существует ли коллекция с заданным ID
+        $query = "SELECT COUNT(*) FROM collections WHERE id = :collection_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':collection_id', $collection_id);
+        $stmt->execute();
 
-        echo "Collection ID: " . $collection_id . "<br>";
-        echo "Movie ID: " . $movie_id . "<br>";
+        if ($stmt->fetchColumn() === '0') {
+            throw new Exception('Collection not found.');
+        }
 
-        $query = "INSERT INTO collections_movies (collection_id, movie_id) VALUES (:collection_id, :movie_id)";
+        // Добавление фильма в коллекцию
+        $query = "INSERT INTO movies (title, description) VALUES (:title, :description)";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':description', $description);
+        $stmt->execute();
+
+        $movie_id = $db->lastInsertId();
+
+        $query = "INSERT INTO collections (collection_id, movie_id) VALUES (:collection_id, :movie_id)";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':collection_id', $collection_id);
         $stmt->bindParam(':movie_id', $movie_id);
         $stmt->execute();
-
-        return true;
     } catch (PDOException $e) {
-        echo "Error Message: " . $e->getMessage() . "<br>";
-        throw new Exception('Failed to add movie to collection. Please try again.');
+        throw new Exception('Failed to add movie to collection: ' . $e->getMessage());
     }
 }
+
 
 // Создание фильма
 function create_movie($title, $description, $release_year, $language) {
