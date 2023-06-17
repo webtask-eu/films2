@@ -248,21 +248,28 @@ function translate_text($text, $targetLanguage) {
 }
 
 
-function create_collection($name, $description) {
+function create_collection($name, $description, $user_id)
+{
     try {
         global $db;
 
-        $query = "INSERT INTO collections (name, description) VALUES (:name, :description)";
+        $query = "INSERT INTO collections (name, description, user_id) VALUES (:name, :description, :user_id)";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
 
         return $db->lastInsertId();
     } catch (PDOException $e) {
-        throw new Exception('Failed to create collection: ' . $e->getMessage());
+        // Записываем ошибку в лог файл
+        error_log('Failed to create collection: ' . $e->getMessage());
+
+        // Пробрасываем исключение дальше
+        throw new Exception('Failed to create collection. Please try again.');
     }
 }
+
 
 
 
