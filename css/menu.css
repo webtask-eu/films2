@@ -14,7 +14,7 @@ nav {
   /* Стили для каждого пункта меню */
   nav ul li {
     display: inline-block;
-    margin: 0;
+    margin: 0 10px;
   }
   
   /* Стили для ссылок в пунктах меню */
@@ -55,9 +55,8 @@ nav {
   
   /* Стили для пунктов меню по центру */
   nav ul li.center {
-    flex-grow: 1;
-    text-align: center;
-    margin: 0;
+    display: flex;
+    justify-content: center;
   }
   
   /* Стили для контейнера с выровненными пунктами меню */
@@ -65,12 +64,6 @@ nav {
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
-    max-width: 800px; /* Настройка максимальной ширины меню */
-  }
-  
-  /* Настройка отступов между пунктами меню */
-  .nav-item-spacing {
-    margin-left: 20px; /* Измените этот параметр по своему усмотрению */
   }
   
   .logo {
