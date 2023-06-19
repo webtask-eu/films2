@@ -56,10 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Add Movie</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/add_movie.css">
+    <link rel="stylesheet" href="/css/submenu.css">
 </head>
 <body>
     <header>
         <?php include_once __DIR__ . '/menu.php'; ?>
+        <?php if (is_logged_in()) { ?>
+        <?php include_once __DIR__ . '/submenu.php'; ?>    
+        <?php } ?>
     </header>
     <main>
         <h1>Add Movie</h1>
