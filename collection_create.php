@@ -54,6 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <header>
         <?php include_once __DIR__ . '/menu.php'; ?>
+        <?php if (is_logged_in()) { ?>
+        <?php include_once __DIR__ . '/submenu.php'; ?>    
+        <?php } ?>
     </header>
     <main>
         <h1><?php echo translate('Create Collection'); ?></h1>
