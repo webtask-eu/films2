@@ -30,6 +30,8 @@ return [
     'Please select a collection.' => 'Lūdzu, izvēlieties kolekciju.',
     'Failed to add movie to collection: ' => 'Neizdevās pievienot filmu kolekcijai: ',
     'Add Movie' => 'Pievienot filmu',
+    'Collection' => 'Kolekcija',
+    'Title' => 'Nosaukums',
 
 ];
 
