@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title><?php echo translate('Create Collection'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/collection_create.css">
+    <link rel="stylesheet" href="/css/submenu.css">
 </head>
 <body>
     <header>
