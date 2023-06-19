@@ -22,6 +22,7 @@ try {
     <title>My Collections</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/collections.css">
+    <link rel="stylesheet" href="/css/submenu.css">
 </head>
 <body>
     <header>
