@@ -1,3 +1,6 @@
+<?php ?>
+$active_page = basename($_SERVER['PHP_SELF']);
+?>
 <ul class="submenu">
   <li class="left-items<?php echo ($active_page === 'collection_create.php') ? ' active' : ''; ?>">
     <a href="/collection_create.php"><?php echo translate('Create Collection'); ?></a>
