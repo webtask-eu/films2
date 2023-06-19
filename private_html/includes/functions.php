@@ -361,28 +361,6 @@ function add_movie_to_collection($collection_id, $title, $description)
     }
 }
 
-function get_collection_movies($collection_id)
-{
-    try {
-        global $db;
-
-        $query = "SELECT movies.title FROM movies
-                  INNER JOIN collections ON collections.movie_id = movies.id
-                  WHERE collections.id = :collection_id";
-
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':collection_id', $collection_id);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        throw new Exception('Failed to get collection movies: ' . $e->getMessage());
-    }
-}
-
-
-
-
 // Получение списка фильмов
 function get_movies() {
     try {
@@ -454,5 +432,24 @@ function get_current_user_id()
 
         // Пробрасываем исключение дальше
         throw new Exception('Failed to get current user ID: ' . $e->getMessage());
+    }
+}
+
+function get_collection_movies($collection_id)
+{
+    try {
+        global $db;
+
+        $query = "SELECT movies.title FROM movies
+                  INNER JOIN collections ON collections.movie_id = movies.id
+                  WHERE collections.id = :collection_id";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':collection_id', $collection_id);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        throw new Exception('Failed to get collection movies: ' . $e->getMessage());
     }
 }
