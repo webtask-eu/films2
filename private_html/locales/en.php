@@ -23,6 +23,8 @@ return [
     'Create' => 'Create',
     'Movie Count' => 'Movie Count',
     'View Collection' => 'View Collection',
+    'Register' => 'Reģistrēties',
+    'Forgot Password?' => 'Aizmirsāt parol
 ];
 
 ?>
