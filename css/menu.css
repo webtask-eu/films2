@@ -1,4 +1,3 @@
-
 /* Стили для основного контейнера меню */
 nav {
     background-color: #003da5;
@@ -10,12 +9,11 @@ nav {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: space-between;
   }
   
   /* Стили для каждого пункта меню */
   nav ul li {
+    display: inline-block;
     margin: 0 10px;
   }
   
@@ -57,28 +55,28 @@ nav {
   
   /* Стили для пунктов меню по центру */
   nav ul li.center {
-    flex-grow: 1;
-    text-align: center;
+    display: flex;
+    justify-content: center;
   }
   
-  
-  /* Стили для центрирования пунктов меню */
-  li.center {
+  /* Стили для контейнера с выровненными пунктами меню */
+  .centered-menu {
+    display: flex;
+    justify-content: space-between;
     margin: 0 auto;
   }
   
-  
-
-.logo {
+  .logo {
     float: left;
     margin-right: 20px;
-}
-
-.menu {
+  }
+  
+  .menu {
     float: left;
     margin-left: 20px;
-}
-
-.language {
+  }
+  
+  .language {
     float: right;
-}
+  }
+  
