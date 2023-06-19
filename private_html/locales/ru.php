@@ -30,6 +30,8 @@ return [
     'Please select a collection.' => 'Пожалуйста, выберите коллекцию.',
     'Failed to add movie to collection: ' => 'Не удалось добавить фильм в коллекцию: ',
     'Add Movie' => 'Добавить фильм',
+    'Collection' => 'Коллекция',
+    'Title' => 'Название',
 
 ];
 
