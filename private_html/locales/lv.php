@@ -25,6 +25,11 @@ return [
     'View Collection' => 'Skatīt kolekciju',
     'Register' => 'Reģistrēties',
     'Forgot Password?' => 'Aizmirsāt paroli?',
+    'You don\'t have any collections. <a href="/collection_create.php">Create a collection</a>' => 'Jums nav nevienas kolekcijas. <a href="/collection_create.php">Izveidojiet kolekciju</a>',
+    'Please enter a title for the movie.' => 'Lūdzu, ievadiet filmas nosaukumu.',
+    'Please select a collection.' => 'Lūdzu, izvēlieties kolekciju.',
+    'Failed to add movie to collection: ' => 'Neizdevās pievienot filmu kolekcijai: ',
+    'Add Movie' => 'Pievienot filmu',
 
 ];
 
