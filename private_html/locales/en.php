@@ -25,6 +25,6 @@ return [
     'View Collection' => 'View Collection',
     'Register' => 'Register',
     'Forgot Password?' => 'Forgot Password?',
-]
+];
 
 ?>
