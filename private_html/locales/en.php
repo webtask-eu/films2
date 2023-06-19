@@ -25,6 +25,11 @@ return [
     'View Collection' => 'View Collection',
     'Register' => 'Register',
     'Forgot Password?' => 'Forgot Password?',
+    'You don\'t have any collections. <a href="/collection_create.php">Create a collection</a>' => 'You don\'t have any collections. <a href="/collection_create.php">Create a collection</a>',
+    'Please enter a title for the movie.' => 'Please enter a title for the movie.',
+    'Please select a collection.' => 'Please select a collection.',
+    'Failed to add movie to collection: ' => 'Failed to add movie to collection: ',
+    'Add Movie' => 'Add Movie',
 ];
 
 ?>
