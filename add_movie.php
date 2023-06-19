@@ -39,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Добавление фильма в коллекцию
         try {
-            add_movie_to_collection($_POST['collection_id'], $title, $description); // Исправлено: использовать $_POST['collection_id'] вместо $collection_id
+            $collection_id = $_POST['collection_id'] ?? $collection_id; // Исправлено: использовать $_POST['collection_id'] или сохраненное значение $collection_id
+            add_movie_to_collection($collection_id, $title, $description);
             redirect('/collections.php');
         } catch (Exception $e) {
             $error_message = 'Failed to add movie to collection: ' . $e->getMessage();
