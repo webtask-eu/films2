@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title><?php echo translate('Login'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/menu.css">
 </head>
 <body>
     <header>

@@ -1,0 +1,84 @@
+
+/* Стили для основного контейнера меню */
+nav {
+    background-color: #003da5;
+    padding: 10px 20px;
+  }
+  
+  /* Стили для списка пунктов меню */
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Стили для каждого пункта меню */
+  nav ul li {
+    margin: 0 10px;
+  }
+  
+  /* Стили для ссылок в пунктах меню */
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+  }
+  
+  /* Стили для активной ссылки в меню */
+  nav ul li.active a {
+    font-weight: bold;
+  }
+  
+  /* Стили для ссылок выбора языка */
+  nav ul li.language a {
+    padding: 5px 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+  }
+  
+  /* Стили для контейнера с пунктами меню */
+  nav ul li.menu-items {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Стили для названия сайта */
+  nav ul li.site-title {
+    font-weight: bold;
+  }
+  
+  /* Стили для пунктов меню справа */
+  nav ul li.right {
+    margin-left: auto;
+  }
+  
+  /* Стили для пунктов меню по центру */
+  nav ul li.center {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  
+  /* Стили для центрирования пунктов меню */
+  li.center {
+    margin: 0 auto;
+  }
+  
+  
+
+.logo {
+    float: left;
+    margin-right: 20px;
+}
+
+.menu {
+    float: left;
+    margin-left: 20px;
+}
+
+.language {
+    float: right;
+}
