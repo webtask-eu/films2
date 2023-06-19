@@ -23,6 +23,9 @@ return [
     'Create' => 'Izveidot',
     'Movie Count' => 'Filmu skaits',
     'View Collection' => 'Skatīt kolekciju',
+    'Register' => 'Reģistrēties',
+    'Forgot Password?' => 'Aizmirsāt paroli?',
+
 ];
 
 ?>
