@@ -39,6 +39,7 @@ try {
                     <h2><?php echo $collection['name']; ?></h2>
                     <?php
                     try {
+                        echo $collection['id'];
                         $movies = get_collection_movies($collection['id']);
                     } catch (Exception $e) {
                         $error_message = 'Failed to get collection movies: ' . $e->getMessage();
