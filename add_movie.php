@@ -16,7 +16,7 @@ $error_message = '';
 // Получение списка коллекций пользователя
 try {
     $collections = get_user_collections();
-    var_dump($collections); // Отладочная информация
+   // var_dump($collections); // Отладочная информация
 
     // Если у пользователя нет доступных коллекций, предложить создать коллекцию
     if (empty($collections)) {
