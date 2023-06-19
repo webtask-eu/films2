@@ -20,11 +20,11 @@ try {
 
     // Если у пользователя нет доступных коллекций, предложить создать коллекцию
     if (empty($collections)) {
-        echo 'You don\'t have any collections. <a href="/collection_create.php">Create a collection</a>';
+        echo translate('You don\'t have any collections. <a href="/collection_create.php">Create a collection</a>');
         exit;
     }
 } catch (Exception $e) {
-    $error_message = 'Failed to get user collections: ' . $e->getMessage();
+    $error_message = translate('Failed to get user collections: ') . $e->getMessage();
 }
 
 // Обработка отправки формы
@@ -36,16 +36,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Валидация данных
     if (empty($title)) {
-        $error_message = 'Please enter a title for the movie.';
+        $error_message = translate('Please enter a title for the movie.');
     } elseif (empty($selected_collection_id)) {
-        $error_message = 'Please select a collection.';
+        $error_message = translate('Please select a collection.');
     } else {
         // Добавление фильма в коллекцию
         try {
             add_movie_to_collection($selected_collection_id, $title, $description);
             redirect('/collections.php');
         } catch (Exception $e) {
-            $error_message = 'Failed to add movie to collection: ' . $e->getMessage();
+            $error_message = translate('Failed to add movie to collection: ') . $e->getMessage();
         }
     }
 }
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Add Movie</title>
+    <title><?php echo translate('Add Movie'); ?></title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/add_movie.css">
     <link rel="stylesheet" href="/css/submenu.css">
@@ -70,13 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php } ?>
     </header>
     <main>
-        <h1>Add Movie</h1>
+        <h1><?php echo translate('Add Movie'); ?></h1>
         <?php if ($error_message) { ?>
             <p class="error"><?php echo $error_message; ?></p>
         <?php } ?>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <div class="form-group">
-                <label for="collection">Collection:</label>
+                <label for="collection"><?php echo translate('Collection'); ?>:</label>
                 <select id="collection" name="collection_id">
                     <?php foreach ($collections as $collection) { ?>
                         <option value="<?php echo $collection['id']; ?>" <?php echo ($collection_id === $collection['id']) ? 'selected' : ''; ?>><?php echo $collection['name']; ?></option>
@@ -84,14 +84,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </select>
             </div>
             <div class="form-group">
-                <label for="title">Title:</label>
+                <label for="title"><?php echo translate('Title'); ?>:</label>
                 <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>">
             </div>
             <div class="form-group">
-                <label for="description">Description:</label>
+                <label for="description"><?php echo translate('Description'); ?>:</label>
                 <textarea id="description" name="description"><?php echo htmlspecialchars($description); ?></textarea>
             </div>
-            <button type="submit">Add Movie</button>
+            <button type="submit"><?php echo translate('Add Movie'); ?></button>
         </form>
     </main>
 </body>
