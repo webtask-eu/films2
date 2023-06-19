@@ -28,3 +28,7 @@
     font-weight: bold;
   }
   
+  .submenu .active {
+    font-weight: bold;
+  }
+  
