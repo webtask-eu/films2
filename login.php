@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = login_user_by_email($email, $password);
         if ($result['success']) {
             // Авторизация успешна, перенаправление на страницу профиля
-            redirect('/profile.php');
+            redirect('/collections.php');
         } else {
             $error_message = $result['message'];
         }
