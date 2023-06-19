@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/add_movie.css">
     <link rel="stylesheet" href="/css/submenu.css">
+    <link rel="stylesheet" href="/css/menu.css">
 </head>
 <body>
     <header>
