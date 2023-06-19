@@ -52,3 +52,23 @@
     margin-top: 10px;
   }
   
+  /* Стили для ссылок на странице логина */
+.links {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.links a {
+  color: #4183c4;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  color: #1b3f5a;
+}
+
+.links .separator {
+  margin: 0 10px;
+  color: #777;
+}
