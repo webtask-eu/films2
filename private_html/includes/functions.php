@@ -440,15 +440,13 @@ function get_collection_movies($collection_id)
     try {
         global $db;
 
-        $query = "SELECT movies.title FROM movies
-                  INNER JOIN collections ON collections.movie_id = movies.id
-                  WHERE collections.id = :collection_id";
-
+        $query = "SELECT * FROM movies WHERE collection_id = :collection_id";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':collection_id', $collection_id);
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $movies;
     } catch (PDOException $e) {
         throw new Exception('Failed to get collection movies: ' . $e->getMessage());
     }
