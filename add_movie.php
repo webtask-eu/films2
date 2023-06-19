@@ -32,15 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Получение данных из формы
     $title = $_POST['title'];
     $description = $_POST['description'];
+    $selected_collection_id = $_POST['collection_id'] ?? '';
 
     // Валидация данных
     if (empty($title)) {
         $error_message = 'Please enter a title for the movie.';
+    } elseif (empty($selected_collection_id)) {
+        $error_message = 'Please select a collection.';
     } else {
         // Добавление фильма в коллекцию
         try {
-            $collection_id = $_POST['collection_id'] ?? $collection_id; // Исправлено: использовать $_POST['collection_id'] или сохраненное значение $collection_id
-            add_movie_to_collection($collection_id, $title, $description);
+            add_movie_to_collection($selected_collection_id, $title, $description);
             redirect('/collections.php');
         } catch (Exception $e) {
             $error_message = 'Failed to add movie to collection: ' . $e->getMessage();
@@ -80,9 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php } ?>
                 </select>
             </div>
-            <!-- Добавлено скрытое поле с значением $collection_id -->
-            <input type="hidden" name="collection_id" value="<?php echo $collection_id; ?>">
-            <?php echo '$collection_id'. $collection_id; ?>
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>">
