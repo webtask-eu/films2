@@ -62,9 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit"><?php echo translate('Login'); ?></button>
         </form>
         <div class="links">
-            <a class="register-link" href="/registration.php"><?php echo translate('Register'); ?></a>
+            <a href="/register.php"><?php echo translate('Register'); ?></a>
             <span class="separator">|</span>
-            <a class="forgot-password-link" href="/password_recovery.php"><?php echo translate('Forgot password'); ?></a>
+            <a href="/forgot_password.php"><?php echo translate('Forgot Password?'); ?></a>
         </div>
     </div>
 </body>
