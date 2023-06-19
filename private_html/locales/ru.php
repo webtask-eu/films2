@@ -23,8 +23,9 @@ return [
     'Create' => 'Создать',
     'Movie Count' => 'Количество фильмов',
     'View Collection' => 'Просмотр коллекции',
-    'text_register' => 'Регистрация',
-    'text_forgot_password' => 'Забыли пароль?',
+    'Register' => 'Регистрация',
+    'Forgot Password?' => 'Забыли пароль?',
+
 ];
 
 ?>
