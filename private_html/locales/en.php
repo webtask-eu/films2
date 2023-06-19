@@ -30,6 +30,8 @@ return [
     'Please select a collection.' => 'Please select a collection.',
     'Failed to add movie to collection: ' => 'Failed to add movie to collection: ',
     'Add Movie' => 'Add Movie',
+    'Collection' => 'Collection',
+    'Title' => 'Title',
 ];
 
 ?>
