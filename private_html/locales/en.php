@@ -24,4 +24,7 @@ return [
     'Movie Count' => 'Movie Count',
     'View Collection' => 'View Collection',
     'Register' => 'Register',
+    'Register' => 'Register',
+    'Forgot Password?' => 'Forgot Password?',
+
 ?>
