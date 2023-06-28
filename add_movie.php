@@ -145,6 +145,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
     var movieSuggestions = [];
 
+    var movieSuggestions = [];
+
     function getMovieSuggestions(query) {
         const apiKey = '<?php echo $tmdbApiKey; ?>';
         const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
@@ -167,8 +169,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 console.error('Failed to fetch movie suggestions:', error);
             });
     }
-</script>
 
+    function selectMovie(event) {
+        const selectedTitle = event.target.textContent;
+        const selectedMovie = movieSuggestions.find(movie => movie.title === selectedTitle);
+
+        if (selectedMovie) {
+            document.getElementById('title').value = selectedMovie.title;
+            document.getElementById('poster').value = `https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`;
+            document.getElementById('poster-preview').src = `https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`;
+            document.getElementById('poster-preview').style.display = 'block';
+            document.getElementById('description').value = selectedMovie.overview;
+        }
+    }
+</script>
 
 </body>
 </html>
