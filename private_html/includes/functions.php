@@ -349,7 +349,7 @@ function add_movie_to_collection($collection_id, $title, $description, $posterPa
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':collection_id', $collection_id); // Добавлено: передача значения 'collection_id'
-        $stmt->bindParam(':poster_path', $poster_path); // Добавлено: передача значения 'collection_id'
+        $stmt->bindParam(':poster_path', $poster_path); // Добавлено: передача значения 'poster_path'
         $stmt->execute();
     } catch (PDOException $e) {
         // Выводим отладочную информацию
