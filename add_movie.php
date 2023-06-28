@@ -143,6 +143,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </main>
     <script>
+        var movieSuggestions = []; // Инициализация переменной movieSuggestions
+
         function getMovieSuggestions(query) {
             const apiKey = '<?php echo TMDB_API_KEY; ?>';
             const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
