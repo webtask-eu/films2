@@ -103,25 +103,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
     <script>
         function getMovieSuggestions(query) {
-            const apiKey = '<?php echo TMDB_API_KEY; ?>';
-            const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
+        const apiKey = '<?php echo TMDB_API_KEY; ?>';
+        const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    const suggestionsContainer = document.getElementById('suggestions');
-                    suggestionsContainer.innerHTML = '';
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const suggestionsContainer = document.getElementById('suggestions');
+                suggestionsContainer.innerHTML = '';
 
-                    data.results.forEach(movie => {
-                        const li = document.createElement('li');
-                        li.textContent = movie.title;
-                        suggestionsContainer.appendChild(li);
-                    });
-                })
-                .catch(error => {
-                    console.error('Failed to fetch movie suggestions:', error);
+                data.results.forEach(movie => {
+                    const li = document.createElement('li');
+                    const img = document.createElement('img'); // Создание элемента <img>
+                    img.src = `https://image.tmdb.org/t/p/w92${movie.poster_path}`; // Установка src для миниатюры постера
+                    img.alt = 'Poster';
+                    li.textContent = movie.title;
+                    li.prepend(img); // Добавление миниатюры перед текстом фильма
+                    suggestionsContainer.appendChild(li);
                 });
-        }
+            })
+            .catch(error => {
+                console.error('Failed to fetch movie suggestions:', error);
+            });
+    }
+
 
         function selectMovie(event) {
             const selectedTitle = event.target.textContent;
