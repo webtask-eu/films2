@@ -32,6 +32,8 @@ return [
     'Add Movie' => 'Pievienot filmu',
     'Collection' => 'Kolekcija',
     'Title' => 'Nosaukums',
+    'Poster' => 'Plakāts',
+
 
 ];
 
