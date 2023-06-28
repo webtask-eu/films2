@@ -125,9 +125,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="form-group">
                 <label for="poster"><?php echo translate('Poster'); ?>:</label>
-                <input type="text" id="poster" name="poster" value="<?php echo htmlspecialchars($poster); ?>" readonly>
-                <img id="poster-preview" class="poster-preview" src="" alt="Poster Preview">
+                <input type="text" id="poster" name="poster" value="<?php echo isset($poster) ? htmlspecialchars($poster) : ''; ?>" readonly>
+                <?php if (isset($poster) && !empty($poster)) { ?>
+                    <img id="poster-preview" class="poster-preview" src="<?php echo htmlspecialchars($poster); ?>" alt="Poster Preview">
+                <?php } else { ?>
+                    <p class="error">Error: Poster is not available.</p>
+                <?php } ?>
             </div>
+
             <div class="form-group">
                 <label for="description"><?php echo translate('Description'); ?>:</label>
                 <textarea id="description" name="description"><?php echo htmlspecialchars($description); ?></textarea>
