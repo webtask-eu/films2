@@ -167,20 +167,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 console.error('Failed to fetch movie suggestions:', error);
             });
     }
-
-    function selectMovie(event) {
-        const selectedTitle = event.target.textContent;
-        const selectedMovie = movieSuggestions.find(movie => movie.title === selectedTitle);
-
-        if (selectedMovie) {
-            document.getElementById('title').value = selectedMovie.title;
-            document.getElementById('poster').value = `https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`;
-            document.getElementById('poster-preview').src = `https://image.tmdb.org/t/p/w200${selectedMovie.poster_path}`;
-            document.getElementById('poster-preview').style.display = 'block';
-            document.getElementById('description').value = selectedMovie.overview;
-        }
-    }
 </script>
+
 
 </body>
 </html>
