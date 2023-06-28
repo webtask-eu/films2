@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </main>
     <script>
-        function getMovieSuggestions(query) {
+function getMovieSuggestions(query) {
     const apiKey = '<?php echo TMDB_API_KEY; ?>';
     const language = '<?php echo $currentLanguage; ?>'; // Получение текущего языка
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&language=${language}`;
@@ -120,6 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 img.alt = 'Poster';
                 li.textContent = movie.title;
                 li.prepend(img); // Добавление миниатюры перед текстом фильма
+                li.setAttribute('data-movie-id', movie.id); // Добавление атрибута с ID фильма
                 suggestionsContainer.appendChild(li);
             });
         })
@@ -128,16 +129,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
 }
 
+function selectMovie(event) {
+    const selectedTitle = event.target.textContent;
+    const selectedMovieId = event.target.getAttribute('data-movie-id'); // Получение ID фильма из атрибута
 
+    if (selectedMovieId) {
+        const apiKey = '<?php echo TMDB_API_KEY; ?>';
+        const language = '<?php echo $currentLanguage; ?>'; // Получение текущего языка
+        const url = `https://api.themoviedb.org/3/movie/${selectedMovieId}?api_key=${apiKey}&language=${language}`;
 
-        function selectMovie(event) {
-            const selectedTitle = event.target.textContent;
-            const selectedMovie = Array.from(document.querySelectorAll('.suggestions ul li')).find(li => li.textContent === selectedTitle);
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('title').value = selectedTitle;
+                document.getElementById('poster').value = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
+                document.getElementById('poster-preview').src = `https://image.tmdb.org/t/p/w200${data.poster_path}`;
+                document.getElementById('poster-preview').style.display = 'block';
+                document.getElementById('description').value = data.overview;
+            })
+            .catch(error => {
+                console.error('Failed to fetch movie details:', error);
+            });
+    }
+}
 
-            if (selectedMovie) {
-                document.getElementById('title').value = selectedMovie.textContent;
-            }
-        }
     </script>
     <script src="/js/add_movie.js"></script>
 </body>
