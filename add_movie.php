@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Добавление фильма в коллекцию
         try {
-            add_movie_to_collection($selected_collection_id, $title, $description);
+            add_movie_to_collection($selected_collection_id, $title, $description, $posterPath);
             redirect('/collections.php');
         } catch (Exception $e) {
             $error_message = translate('Failed to add movie to collection: ') . $e->getMessage();
