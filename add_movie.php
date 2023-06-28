@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $description = $_POST['description'];
     $selected_collection_id = $_POST['collection_id'] ?? '';
-    $posterPath = $_POST['poster-preview'] ?? '';
+    $posterPath = $_POST['poster'] ?? '';
 
     // Валидация данных
     if (empty($title)) {
