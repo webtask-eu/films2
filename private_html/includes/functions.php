@@ -338,18 +338,17 @@ function get_collection($collectionId)
 
 
 // Функция для добавления фильма в коллекцию
-function add_movie_to_collection($collection_id, $title, $description, $posterPath)
+function add_movie_to_collection($collection_id, $title, $description)
 {
     try {
         global $db;
 
         // Добавление фильма в коллекцию
-        $query = "INSERT INTO movies (title, description, collection_id, poster_path) VALUES (:title, :description, :collection_id, :poster_path)";
+        $query = "INSERT INTO movies (title, description, collection_id) VALUES (:title, :description, :collection_id)";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':collection_id', $collection_id); // Добавлено: передача значения 'collection_id'
-        $stmt->bindParam(':poster_path', $poster_path); // Добавлено: передача значения 'poster_path'
         $stmt->execute();
     } catch (PDOException $e) {
         // Выводим отладочную информацию
