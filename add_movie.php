@@ -84,7 +84,7 @@
     </main>
     <script>
         function getMovieSuggestions(query) {
-            const apiKey = 'fca80a35e9a4bccbf9a300c8e938e3e0';
+            const apiKey = 'YOUR_TMDB_API_KEY';
             const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
 
             fetch(url)
