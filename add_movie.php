@@ -142,17 +142,18 @@ function selectMovie(event) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                document.getElementById('title').value = selectedTitle;
-                document.getElementById('poster').value = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
-                document.getElementById('poster-preview').src = `https://image.tmdb.org/t/p/w200${data.poster_path}`;
-                document.getElementById('poster-preview').style.display = 'block';
-                document.getElementById('description').value = data.overview;
+                document.getElementById('title').value = selectedTitle || '';
+                document.getElementById('poster').value = data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : '';
+                document.getElementById('poster-preview').src = data.poster_path ? `https://image.tmdb.org/t/p/w200${data.poster_path}` : '';
+                document.getElementById('poster-preview').style.display = data.poster_path ? 'block' : 'none';
+                document.getElementById('description').value = data.overview || '';
             })
             .catch(error => {
                 console.error('Failed to fetch movie details:', error);
             });
     }
 }
+
 
     </script>
     <script src="/js/add_movie.js"></script>
