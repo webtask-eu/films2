@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $description = $_POST['description'];
     $selected_collection_id = $_POST['collection_id'] ?? '';
-    $posterPath = $_POST['poster'] ?? '';
+    $poster_path = $_POST['poster'] ?? '';
 
     // Валидация данных
     if (empty($title)) {
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Добавление фильма в коллекцию
         try {
-            add_movie_to_collection($selected_collection_id, $title, $description, $posterPath);
+            add_movie_to_collection($selected_collection_id, $title, $description, $poster_path);
             redirect('/collections.php');
         } catch (Exception $e) {
             $error_message = translate('Failed to add movie to collection: ') . $e->getMessage();
@@ -51,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -153,9 +152,6 @@ function selectMovie(event) {
             });
     }
 }
-
-
-
     </script>
     <script src="/js/add_movie.js"></script>
 </body>
