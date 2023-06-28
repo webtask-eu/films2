@@ -29,4 +29,4 @@ if (isset($_GET['lang'])) {
 $currentLanguage = get_language();
 
 // API-ключ TMDb
-define('TMDB_API_KEY', 'YOUR_TMDB_API_KEY');
+define('TMDB_API_KEY', 'fca80a35e9a4bccbf9a300c8e938e3e0');
