@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,6 +105,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit"><?php echo translate('Add Movie'); ?></button>
         </form>
     </main>
+    <script>
+        function getMovieSuggestions(query) {
+            const apiKey = '<?php echo TMDB_API_KEY; ?>';
+            const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const suggestionsContainer = document.getElementById('suggestions');
+                    suggestionsContainer.innerHTML = '';
+
+                    data.results.forEach(movie => {
+                        const li = document.createElement('li');
+                        li.textContent = movie.title;
+                        suggestionsContainer.appendChild(li);
+                    });
+                })
+                .catch(error => {
+                    console.error('Failed to fetch movie suggestions:', error);
+                });
+        }
+
+        function selectMovie(event) {
+            const selectedTitle = event.target.textContent;
+            const selectedMovie = Array.from(document.querySelectorAll('.suggestions ul li')).find(li => li.textContent === selectedTitle);
+
+            if (selectedMovie) {
+                document.getElementById('title').value = selectedMovie.textContent;
+            }
+        }
+    </script>
     <script src="/js/add_movie.js"></script>
 </body>
 </html>
