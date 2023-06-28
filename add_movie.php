@@ -1,3 +1,33 @@
+<?
+require_once __DIR__ . '/config.php';
+
+// Проверка авторизации пользователя
+if (!is_logged_in()) {
+    redirect('/login.php');
+}
+
+// Получение ID коллекции из параметра запроса
+$collection_id = $_GET['collection_id'] ?? '';
+
+// Переменные для хранения данных формы
+$title = $description = $poster = '';
+$error_message = '';
+
+// Получение списка коллекций пользователя
+try {
+    $collections = get_user_collections();
+
+    // Если у пользователя нет доступных коллекций, предложить создать коллекцию
+    if (empty($collections)) {
+        echo translate('You don\'t have any collections. <a href="/collection_create.php">Create a collection</a>');
+        exit;
+    }
+} catch (Exception $e) {
+    $error_message = translate('Failed to get user collections: ') . $e->getMessage();
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
