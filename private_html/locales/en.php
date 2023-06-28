@@ -32,6 +32,8 @@ return [
     'Add Movie' => 'Add Movie',
     'Collection' => 'Collection',
     'Title' => 'Title',
+    'Poster' => 'Poster',
+
 ];
 
 ?>
