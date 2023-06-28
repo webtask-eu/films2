@@ -27,3 +27,6 @@ if (isset($_GET['lang'])) {
 
 // Получение текущего языка
 $currentLanguage = get_language();
+
+// API-ключ TMDb
+define('TMDB_API_KEY', 'YOUR_TMDB_API_KEY');
