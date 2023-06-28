@@ -30,3 +30,7 @@ $currentLanguage = get_language();
 
 // API-ключ TMDb
 define('TMDB_API_KEY', 'fca80a35e9a4bccbf9a300c8e938e3e0');
+// Получение значения TMDB_API_KEY из конфигурационного файла
+$tmdbApiKey = TMDB_API_KEY;
+// Передача значения в JavaScript
+echo "<script>const tmdbApiKey = '$tmdbApiKey';</script>";
