@@ -145,17 +145,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         var movieSuggestions = []; // Инициализация переменной movieSuggestions
 
-<<<<<<< HEAD
-    var movieSuggestions = [];
-
-    function getMovieSuggestions(query) {
-        const apiKey = '<?php echo $tmdbApiKey; ?>';
-        const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
-=======
         function getMovieSuggestions(query) {
             const apiKey = '<?php echo TMDB_API_KEY; ?>';
             const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
->>>>>>> parent of e383190 (auto-commit)
+
 
             fetch(url)
                 .then(response => response.json())
