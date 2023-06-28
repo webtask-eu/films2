@@ -155,6 +155,7 @@ function selectMovie(event) {
 }
 
 
+
     </script>
     <script src="/js/add_movie.js"></script>
 </body>
