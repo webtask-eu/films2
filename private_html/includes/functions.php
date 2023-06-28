@@ -338,7 +338,7 @@ function get_collection($collectionId)
 
 
 // Функция для добавления фильма в коллекцию
-function add_movie_to_collection($collection_id, $title, $description)
+function add_movie_to_collection($collection_id, $title, $description, $posterPath)
 {
     try {
         global $db;
