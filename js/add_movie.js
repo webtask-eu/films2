@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const movieSuggestions = [];
 
     function getMovieSuggestions(query) {
-        const apiKey = 'YOUR_API_KEY';
+        const apiKey = tmdbApiKey;
         const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
 
         fetch(url)
