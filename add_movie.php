@@ -2,6 +2,7 @@
 require_once __DIR__ . '/config.php';
 
 $currentLanguage = get_current_language();
+echo $currentLanguage;
 
 // Проверка авторизации пользователя
 if (!is_logged_in()) {
