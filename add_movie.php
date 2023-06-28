@@ -1,4 +1,4 @@
-<?
+<?php
 require_once __DIR__ . '/config.php';
 
 // Проверка авторизации пользователя
@@ -10,12 +10,13 @@ if (!is_logged_in()) {
 $collection_id = $_GET['collection_id'] ?? '';
 
 // Переменные для хранения данных формы
-$title = $description = $poster = '';
+$title = $description = '';
 $error_message = '';
 
 // Получение списка коллекций пользователя
 try {
     $collections = get_user_collections();
+   // var_dump($collections); // Отладочная информация
 
     // Если у пользователя нет доступных коллекций, предложить создать коллекцию
     if (empty($collections)) {
@@ -26,7 +27,31 @@ try {
     $error_message = translate('Failed to get user collections: ') . $e->getMessage();
 }
 
+// Обработка отправки формы
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Получение данных из формы
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $selected_collection_id = $_POST['collection_id'] ?? '';
+
+    // Валидация данных
+    if (empty($title)) {
+        $error_message = translate('Please enter a title for the movie.');
+    } elseif (empty($selected_collection_id)) {
+        $error_message = translate('Please select a collection.');
+    } else {
+        // Добавление фильма в коллекцию
+        try {
+            add_movie_to_collection($selected_collection_id, $title, $description);
+            redirect('/collections.php');
+        } catch (Exception $e) {
+            $error_message = translate('Failed to add movie to collection: ') . $e->getMessage();
+        }
+    }
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html>
